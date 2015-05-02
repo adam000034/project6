@@ -41,6 +41,32 @@ class CodeGenerator implements AATVisitor {
 	return null;
     }
     public Object VisitMove(AATMove statement) {
+        if (statement.lhs() instanceof AATMemory)
+        {
+            AATMemory lhs = (AATMemory) statement.lhs();
+            if (lhs.mem() instanceof AATOperator && + or -)
+            {
+                cast as an operator
+                if LHS is a register, RHS is a constant
+                    emit code for small tile
+                        statement.rhs().Accept(this);
+                    emit("sw " + Register.ACC() + offset + "(" + Register + ")";
+            }
+            {
+                lhs.mem().Accept(this)
+                emit("sw " + Register.ACC() + ", 0(" + Register.ESP() ")");
+                emit("addi " + Register.ESP() + "," + Register.ESP() + (-MachineDependent.WORDSIZE));
+                statement.rhs().Accept(this);
+                emit("lw...)(load value into t1
+                    ...
+                emit ("sw " + Register.ACC() + "0(" + t1 + ")")
+            }
+        }  else {
+            AATRegister lhs = (AATRegister) statement.lhs();
+            statement.rhs().Accept(this);
+            emit("addi " + lhs.register() + "," + Register.ACC() +",0");
+        }
+                     
     }
     public Object VisitReturn(AATReturn statement) {
 	emit("jr " + Register.ReturnAddr());
@@ -50,7 +76,7 @@ class CodeGenerator implements AATVisitor {
     public Object VisitHalt(AATHalt halt) {
 	/* Don't need to implement halt -- you can leave 
 	   this as it is, if you like */
-	return null;
+        return null;
     }
     public Object VisitSequential(AATSequential statement) {
     }
