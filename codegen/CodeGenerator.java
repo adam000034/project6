@@ -12,25 +12,53 @@ class CodeGenerator implements AATVisitor {
 	EmitSetupCode();
     }
   
-    public Object VisitCallExpression(AATCallExpression expression) { 
+    public Object VisitCallExpression(AATCallExpression expression) {
+        return null;
     }
   
     public Object VisitMemory(AATMemory expression) { 
+        //If lhs = register and rhs = constant --> 
+        //      emit lw
+        //Else (arbitrarily complicated) --> 
+        //      statement.accept(this);        
+        //      emit lw $acc, 0 ($acc)
+        return null;
     }
     
     
     public Object VisitOperator(AATOperator expression) { 
+        //visit lhs
+        //store ACC to stack
+        //visit rhs
+        //move val from stack to t1
+        
+        //switch statement on operator
+            //emit accordingly
+            //+
+            //  add t1 to ACC and put into ACC
+            //==
+            //  create labels
+            //  beq t1, ACC, true label
+            //  mov 0 into ACC
+            //  jump end
+            //  true label = move 1 into ACC
+            //  end label
+        return null;
     }
 
-    public Object VisitRegister(AATRegister expression) { 
+    public Object VisitRegister(AATRegister expression) {
+        return null;
     }
     
     public Object VisitCallStatement(AATCallStatement statement) {
+        return null;
     }
     public Object VisitConditionalJump(AATConditionalJump statement) {
+        return null;
     }
     
     public Object VisitEmpty(AATEmpty statement) {
+        return null;
     }
     public Object VisitJump(AATJump statement) {
 	emit("j " + statement.label());
@@ -41,32 +69,35 @@ class CodeGenerator implements AATVisitor {
 	return null;
     }
     public Object VisitMove(AATMove statement) {
-        if (statement.lhs() instanceof AATMemory)
-        {
+        if (statement.lhs() instanceof AATMemory) {
             AATMemory lhs = (AATMemory) statement.lhs();
-            if (lhs.mem() instanceof AATOperator && + or -)
-            {
-                cast as an operator
-                if LHS is a register, RHS is a constant
-                    emit code for small tile
-                        statement.rhs().Accept(this);
-                    emit("sw " + Register.ACC() + offset + "(" + Register + ")";
-            }
-            {
-                lhs.mem().Accept(this)
-                emit("sw " + Register.ACC() + ", 0(" + Register.ESP() ")");
+            if (lhs.mem() instanceof AATOperator) {
+                //cast as an operator
+                AATOperator lhsop = (AATOperator) lhs.mem();
+                //if LHS is a register, RHS is a constant...also checked if +/-
+                if (((lhsop.operator() == AATOperator.PLUS) || (lhsop.operator() == AATOperator.MINUS)) 
+                        && (lhsop.left() instanceof AATRegister) 
+                        && (lhsop.right() instanceof AATConstant)) {
+                    //emit code for small tile
+                    //statement.rhs().Accept(this);
+                    //emit("sw " + Register.ACC() + offset + "(" + Register + ")";
+                }
+            } else {
+                lhs.mem().Accept(this); //outputs code that when executed, will put value of memaddr into ACC
+                emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");   //Save ACC onto Stack
                 emit("addi " + Register.ESP() + "," + Register.ESP() + (-MachineDependent.WORDSIZE));
-                statement.rhs().Accept(this);
-                emit("lw...)(load value into t1
-                    ...
-                emit ("sw " + Register.ACC() + "0(" + t1 + ")")
+                statement.rhs().Accept(this);   //puts into ACC
+                //emit("lw...)(load value into t1
+                //emit - move esp back up
+                emit ("sw " + Register.ACC() + "0(" + Register.Tmp1() + ")");        //store ACC into addr at t1
             }
         }  else {
             AATRegister lhs = (AATRegister) statement.lhs();
             statement.rhs().Accept(this);
             emit("addi " + lhs.register() + "," + Register.ACC() +",0");
+            //more?
         }
-                     
+        return null;             
     }
     public Object VisitReturn(AATReturn statement) {
 	emit("jr " + Register.ReturnAddr());
@@ -79,9 +110,11 @@ class CodeGenerator implements AATVisitor {
         return null;
     }
     public Object VisitSequential(AATSequential statement) {
+        return null;
     }
     
     public Object VisitConstant(AATConstant expression) {
+        return null;
     }
     
     private void emit(String assem) {
