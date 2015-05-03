@@ -20,30 +20,32 @@ class CodeGenerator implements AATVisitor {
         
         //If lhs = register and rhs = constant -->
         //      emit lw
-        //AATMemory lhs = (AATMemory) statement.lhs();
-        if (expression instanceof AATOperator) {
-            //cast as an operator
-            AATOperator lhsop = (AATOperator) expression;
-            //if LHS is a register, RHS is a constant...also checked if +/-
-            if (((lhsop.operator() == AATOperator.PLUS) || (lhsop.operator() == AATOperator.MINUS))
-                && (lhsop.left() instanceof AATRegister)
-                && (lhsop.right() instanceof AATConstant)) {
-                emit("addi " + Register.ACC() + "," + Register.FP() + (0));
-                emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");
-                emit("addi " + Register.ESP() + "," + Register.ESP() + (-MachineDependent.WORDSIZE));
-                emit("addi " + Register.ACC() + "," + 0 + (MachineDependent.WORDSIZE * 3));
-                emit("lw ", Register.Tmp1() + ", " = MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");
-                emit("addi " + Register.ESP() + "," + Register.ESP() + MachineDependent.WORDSIZE);
-                emit("sub " + Register.ACC() + "," + Register.Tmp1() + MachineDependent.WORDSIZE);
-                emit("lw " + Register.ACC() + ", " + 0 + "(" + Register.ACC() + ")");
-            }
+        AATOperator memop = (AATOperator) expression.mem();
+        
+        memop.left().Accept(this);                                                                      //place lhs into ACC    -       Could be Reg or Op (in case of Base Variable)
+        emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");                                   //sw    $ACC, 0($ESP)   -       store ACC into top of Expression Stack
+        emit("addi " + Register.ESP() + ", " + Register.ESP() + ", "+ (-MachineDependent.WORDSIZE));    //addi  $ESP, $ESP, -4  -       Decrement ESP
+        
+        memop.right().Accept(this);                                                                     //place rhs into ACC        
+        emit("lw " + Register.Tmp1() + ", " + MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");  //lw    $t1, 4($ESP)    -       Put LHS into T1
+        emit("addi " + Register.ESP() + ", " + Register.ESP() + ", " + MachineDependent.WORDSIZE);      //addi  $ESP, $ESP, 4   -       Increment ESP
+        
+        if (memop.operator() == AATOperator.MINUS) {
+            emit("sub " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());             //sub   $ACC, $t1, $ACC -       Put LHS Minus Offset into ACC
+        } else if (memop.operator() == AATOperator.PLUS){
+            emit("add " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());             //add   $ACC, $t1, $ACC -       Put LHS Plus Offset into ACC
         }
-        else {
+        
+        emit("lw " + Register.ACC() + ", " + 0 + "(" + Register.ACC() + ")");                           //lw    $ACC, 0($ACC)   -       Put value of LHS+/-Offset into ACC 
+        
+        //I THINK WE SHOULD HOLD OFF ON "ARBITRARILY" COMPLICATED MEM TREES FOR NOW BECAUSE WE NEVER CREATED ANY.
+        
+        /*else {        //Right hand side is not a constant
             //Else (arbitrarily complicated) -->
             //      statement.accept(this);
             //      emit lw $acc, 0 ($acc)
             emit("lw " + Register.ACC() + ", " + 0 + "(" + Register.ACC() + ")");
-        }
+        }*/
         
         
         return null;
@@ -96,16 +98,22 @@ class CodeGenerator implements AATVisitor {
 	return null;
     }
     public Object VisitMove(AATMove statement) {
+        //Memory Location
         if (statement.lhs() instanceof AATMemory) {
             AATMemory lhs = (AATMemory) statement.lhs();
-            if (lhs.mem() instanceof AATOperator) {
+            
+            //I'M WONDERING IF WE EVEN NEED THIS FIRST IF-CLAUSE, BECUASE WON'T LHS.MEM().ACCEPT(THIS) AUTOMATICALLY PUT THE LHS MEM INTO ACC regardless if it's op or direct register??
+            
+            if (lhs.mem() instanceof AATOperator) {     //Operator in lhs
                 //cast as an operator
                 AATOperator lhsop = (AATOperator) lhs.mem();
                 //if LHS is a register, RHS is a constant...also checked if +/-
                 if (((lhsop.operator() == AATOperator.PLUS) || (lhsop.operator() == AATOperator.MINUS)) 
                         && (lhsop.left() instanceof AATRegister) 
                         && (lhsop.right() instanceof AATConstant)) {
+                    //AATRegister reg
                     AATConstant offset = (AATConstant) lhsop.right();
+                    //TODO: FINISH THIS
                     //emit code for small tile
                     //statement.rhs().Accept(this);
                     //emit("sw " + Register.ACC() + offset + "(" + Register + ")";
@@ -113,19 +121,18 @@ class CodeGenerator implements AATVisitor {
             } else {
                 lhs.mem().Accept(this); //outputs code that when executed, will put value of memaddr into ACC
                 emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");   //Save ACC onto Stack
-                emit("addi " + Register.ESP() + "," + Register.ESP() + (-MachineDependent.WORDSIZE));
+                emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + (-MachineDependent.WORDSIZE));
                 statement.rhs().Accept(this);   //puts into ACC
                 emit("lw " + Register.Tmp1() + ", " + MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");  //emit("lw...)(load value into t1 - lw $t1, ($ESP)
-                emit("addi " + Register.ESP() + "," + Register.ESP() + MachineDependent.WORDSIZE);   //emit - move esp back up
-                emit ("sw " + Register.ACC() + "0(" + Register.Tmp1() + ")");        //store ACC into addr at t1
+                emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + MachineDependent.WORDSIZE);   //emit - move esp back up
+                emit ("sw " + Register.ACC() + ", 0(" + Register.Tmp1() + ")");        //store ACC into addr at t1
             }
+        //Register
         }  else {
             AATRegister lhs = (AATRegister) statement.lhs();
             statement.rhs().Accept(this);
             emit("addi " + lhs.register() + "," + Register.ACC() +",0");
-            //nope looks good, checked it
         }
-        //done
         return null;             
     }
     
@@ -133,23 +140,23 @@ class CodeGenerator implements AATVisitor {
     public Object VisitReturn(AATReturn statement) {
 	emit("jr " + Register.ReturnAddr());
 	return null;
-    }
+    }   /* DONE */
 
     public Object VisitHalt(AATHalt halt) {
 	/* Don't need to implement halt -- you can leave 
 	   this as it is, if you like */
         return null;
-    }
+    }   /* DONE */
+    
     public Object VisitSequential(AATSequential statement) {
         return null;
     }
     
     public Object VisitConstant(AATConstant expression) {
-        
-        emit ("sw" + expression.value();
+        emit ("sw " + expression.value() + ", 0(" + Register.ACC() + ")");
         return null;
-    }
-    
+    }   /* DONE */
+//------------------------------------------------------------------------------------------
     private void emit(String assem) {
 	assem = assem.trim();
 	if (assem.charAt(assem.length()-1) == ':') 
