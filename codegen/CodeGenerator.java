@@ -16,18 +16,43 @@ class CodeGenerator implements AATVisitor {
         return null;
     }
   
-    public Object VisitMemory(AATMemory expression) { 
-        //If lhs = register and rhs = constant --> 
+    public Object VisitMemory(AATMemory expression) {
+        
+        //If lhs = register and rhs = constant -->
         //      emit lw
-        //Else (arbitrarily complicated) --> 
-        //      statement.accept(this);        
-        //      emit lw $acc, 0 ($acc)
+        //AATMemory lhs = (AATMemory) statement.lhs();
+        if (expression instanceof AATOperator) {
+            //cast as an operator
+            AATOperator lhsop = (AATOperator) expression;
+            //if LHS is a register, RHS is a constant...also checked if +/-
+            if (((lhsop.operator() == AATOperator.PLUS) || (lhsop.operator() == AATOperator.MINUS))
+                && (lhsop.left() instanceof AATRegister)
+                && (lhsop.right() instanceof AATConstant)) {
+                emit("addi " + Register.ACC() + "," + Register.FP() + (0));
+                emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");
+                emit("addi " + Register.ESP() + "," + Register.ESP() + (-MachineDependent.WORDSIZE));
+                emit("addi " + Register.ACC() + "," + 0 + (MachineDependent.WORDSIZE * 3));
+                emit("lw ", Register.Tmp1() + ", " = MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");
+                emit("addi " + Register.ESP() + "," + Register.ESP() + MachineDependent.WORDSIZE);
+                emit("sub " + Register.ACC() + "," + Register.Tmp1() + MachineDependent.WORDSIZE);
+                emit("lw " + Register.ACC() + ", " + 0 + "(" + Register.ACC() + ")");
+            }
+        }
+        else {
+            //Else (arbitrarily complicated) -->
+            //      statement.accept(this);
+            //      emit lw $acc, 0 ($acc)
+            emit("lw " + Register.ACC() + ", " + 0 + "(" + Register.ACC() + ")");
+        }
+        
+        
         return null;
     }
     
     
     public Object VisitOperator(AATOperator expression) { 
         //visit lhs
+        //expression.lhs
         //store ACC to stack
         //visit rhs
         //move val from stack to t1
@@ -47,6 +72,7 @@ class CodeGenerator implements AATVisitor {
     }
 
     public Object VisitRegister(AATRegister expression) {
+        
         return null;
     }
     
@@ -59,6 +85,7 @@ class CodeGenerator implements AATVisitor {
     
     public Object VisitEmpty(AATEmpty statement) {
         return null;
+        //DONE
     }
     public Object VisitJump(AATJump statement) {
 	emit("j " + statement.label());
@@ -96,10 +123,13 @@ class CodeGenerator implements AATVisitor {
             AATRegister lhs = (AATRegister) statement.lhs();
             statement.rhs().Accept(this);
             emit("addi " + lhs.register() + "," + Register.ACC() +",0");
-            //more?
+            //nope looks good, checked it
         }
+        //done
         return null;             
     }
+    
+    
     public Object VisitReturn(AATReturn statement) {
 	emit("jr " + Register.ReturnAddr());
 	return null;
@@ -115,6 +145,8 @@ class CodeGenerator implements AATVisitor {
     }
     
     public Object VisitConstant(AATConstant expression) {
+        
+        emit ("sw" + expression.value();
         return null;
     }
     
