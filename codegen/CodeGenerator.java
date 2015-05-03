@@ -78,6 +78,7 @@ class CodeGenerator implements AATVisitor {
                 if (((lhsop.operator() == AATOperator.PLUS) || (lhsop.operator() == AATOperator.MINUS)) 
                         && (lhsop.left() instanceof AATRegister) 
                         && (lhsop.right() instanceof AATConstant)) {
+                    AATConstant offset = (AATConstant) lhsop.right();
                     //emit code for small tile
                     //statement.rhs().Accept(this);
                     //emit("sw " + Register.ACC() + offset + "(" + Register + ")";
@@ -87,8 +88,8 @@ class CodeGenerator implements AATVisitor {
                 emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");   //Save ACC onto Stack
                 emit("addi " + Register.ESP() + "," + Register.ESP() + (-MachineDependent.WORDSIZE));
                 statement.rhs().Accept(this);   //puts into ACC
-                //emit("lw...)(load value into t1
-                //emit - move esp back up
+                emit("lw " + Register.Tmp1() + ", " + MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");  //emit("lw...)(load value into t1 - lw $t1, ($ESP)
+                emit("addi " + Register.ESP() + "," + Register.ESP() + MachineDependent.WORDSIZE);   //emit - move esp back up
                 emit ("sw " + Register.ACC() + "0(" + Register.Tmp1() + ")");        //store ACC into addr at t1
             }
         }  else {
