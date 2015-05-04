@@ -84,10 +84,16 @@ class CodeGenerator implements AATVisitor {
                 //divide
                 
             case 6:
+                //not
+                //1 is true
+                //0 is false
                //and
                emit (")
             
             case 7:
+                //not
+                //1 is true
+                //0 is false
                 //or
                 
                 
