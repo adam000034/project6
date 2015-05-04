@@ -54,27 +54,132 @@ class CodeGenerator implements AATVisitor {
     
     public Object VisitOperator(AATOperator expression) { 
         //visit lhs
+        expression.lhs().Accept(this);
         //expression.lhs
+        //place lhs into ACC    -       Could be Reg or Op (in case of Base Variable)
+        emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");                                   //sw    $ACC, 0($ESP)   -       store ACC into top of Expression Stack
+        
         //store ACC to stack
+        expression.rhs().Accept(this);
         //visit rhs
         //move val from stack to t1
-        
-        //switch statement on operator
-            //emit accordingly
-            //+
-            //  add t1 to ACC and put into ACC
-            //==
-            //  create labels
-            //  beq t1, ACC, true label
-            //  mov 0 into ACC
-            //  jump end
-            //  true label = move 1 into ACC
-            //  end label
+        emit("lw " + Register.Tmp1() + ", " + MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");  //lw    $t1, 4($ESP)    -       Put LHS into T1
+        switch (expression.operator()) {
+            case 1:
+                //bad operator
+                return null;
+            case 2:
+                //plus
+                emit("add " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
+                
+            case 3:
+                //minus
+                emit("sub " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
+                
+            case 4:
+                //multiply
+                emit("mult" + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
+            case 5:
+                emit("div" + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
+                //divide
+                
+            case 6:
+               //and
+               emit (")
+            
+            case 7:
+                //or
+                
+                
+            case 8:
+                //equal
+                //==
+                Label new truelabel = new Label("truelabel");
+                Label new endlabel = new Label("endlabel");
+                emit("beq" + Register.Tmp1() + ", " + Register.ACC() + ", " + truelabel);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j" + endlabel);
+                emit(truelabel.label() + ":");
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit(endlabel.label());
+                //  end label
+                
+                
+            case 9:
+                //not_equal
+                Label new netruelabel = new Label("netruelabel");
+                Label new neendlabel = new Label("neendlabel");
+                emit("bne" + Register.Tmp1() + ", " + Register.ACC() + ", " + netruelabel);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j" + neendlabel);
+                emit(netruelabel.label() + ":");
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit(neendlable.label());
+                
+                
+            case 10:
+                //less_than
+                Label new lttruelabel = new Label("lttruelabel");
+                Label new ltendlabel = new Label("ltendlabel");
+                emit("bltz" + Register.Tmp1() + ", " + Register.ACC() + ", " + lttruelabel);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j" + ltendlabel);
+                emit(lttruelabel.label() + ":");
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit(ltendlable.label());
+                
+            case 11:
+                //less_than_equal
+                Label new letruelabel = new Label("letruelabel");
+                Label new leendlabel = new Label("leendlabel");
+                emit("blez" + Register.Tmp1() + ", " + Register.ACC() + ", " + letruelabel);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j" + leendlabel);
+                emit(letruelabel.label() + ":");
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit(leendlable.label());
+                
+            case 12:
+                //greater_than
+                Label new gttruelabel = new Label("gttruelabel");
+                Label new gtendlabel = new Label("gtendlabel");
+                emit("bgtz" + Register.Tmp1() + ", " + Register.ACC() + ", " + gttruelabel);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j" + gtendlabel);
+                emit(gttruelabel.label() + ":");
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit(gtendlable.label());
+                
+            case 13:
+                //greater_than_equal
+                Label new getruelabel = new Label("getruelabel");
+                Label new geendlabel = new Label("geendlabel");
+                emit("bgez" + Register.Tmp1() + ", " + Register.ACC() + ", " + getruelabel);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j" + geendlabel);
+                emit(getruelabel.label() + ":");
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit(geendlable.label());
+                
+            case 14:
+                //not
+                //1 is true
+                //0 is false
+                Label new ntruelabel = new Label("ntruelabel");
+                Label new nendlabel = new Label("nendlabel");
+                emit("!" + Register.ACC() + ", " + ntruelabel);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j" + nendlabel);
+                emit(ntruelabel.label() + ":");
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit(nendlabel.label());
+                
+                     
         return null;
     }
 
     public Object VisitRegister(AATRegister expression) {
-        
+        emit ("addi " + Register.ACC + ", " + expression.register() + ", " + 0);
         return null;
     }
     
