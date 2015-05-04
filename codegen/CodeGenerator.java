@@ -84,17 +84,49 @@ class CodeGenerator implements AATVisitor {
                 //divide
                 
             case 6:
-                //not
                 //1 is true
                 //0 is false
                //and
-               emit (")
+               //process the left side and than right side
+               Label new firstandtruelabel = new Label("firstandtruelabel");
+               Label new firstandendlabel = new Label("firstandendlabel");
+               Label new secondandtruelabel = new Label("secondandtruelabel");
+               Label new secondandendlabel = new Label("secondandendlabel");
+               emit("beq" + Register.ACC() + ", " + 1 + ", " + firstandtruelabel);
+               emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+               emit("j" + firstandendlabel);
+               emit(firstandtruelabel.label() + ":");
+               emit("beq" + Register.ACC() + ", " + 1 + ", " + secondandtruelabel);
+               emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+               emit("j" + secondandendlabel);
+               emit(secondandtruelabel.label() + ":");
+               emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+               emit("j" + secondandendlabel);
+               emit(firstandendlabel.label());
+               emit(secondandendlabel.label());
             
             case 7:
-                //not
                 //1 is true
                 //0 is false
-                //or
+                //and
+                //process the left side and than right side
+                Label new firstortruelabel = new Label("firstortruelabel");
+                Label new firstorendlabel = new Label("firstorendlabel");
+                Label new secondortruelabel = new Label("secondortruelabel");
+                Label new secondorendlabel = new Label("secondorendlabel");
+                emit("beq" + Register.ACC() + ", " + 1 + ", " + firstortruelabel);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("beq" + Register.ACC() + ", " + 1 + ", " + secondortruelabel);
+                emit("j" + firstorendlabel);
+                emit(firstortruelabel.label() + ":");
+                emit("beq" + Register.ACC() + ", " + 1 + ", " + secondortruelabel);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("j" + secondorendlabel);
+                emit(secondortruelabel.label() + ":");
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("j" + secondorendlabel);
+                emit(firstorendlabel.label());
+                emit(secondorendlabel.label());
                 
                 
             case 8:
@@ -173,11 +205,11 @@ class CodeGenerator implements AATVisitor {
                 //0 is false
                 Label new ntruelabel = new Label("ntruelabel");
                 Label new nendlabel = new Label("nendlabel");
-                emit("beq" + Register.ACC() + ", " + 0 + ", " + ntruelabel);
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("beq" + Register.ACC() + ", " + 1 + ", " + ntruelabel);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
                 emit("j" + nendlabel);
                 emit(ntruelabel.label() + ":");
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                 emit(nendlabel.label());
                 
                      
