@@ -167,7 +167,7 @@ class CodeGenerator implements AATVisitor {
                 //0 is false
                 Label new ntruelabel = new Label("ntruelabel");
                 Label new nendlabel = new Label("nendlabel");
-                emit("!" + Register.ACC() + ", " + ntruelabel);
+                emit("beq" + Register.ACC() + ", " + 0 + ", " + ntruelabel);
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                 emit("j" + nendlabel);
                 emit(ntruelabel.label() + ":");
