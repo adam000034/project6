@@ -20,8 +20,34 @@ class CodeGenerator implements AATVisitor {
         
         //If lhs = register and rhs = constant -->
         //      emit lw
-        AATOperator memop = (AATOperator) expression.mem();
+        if (expression.mem() instanceof AATOperator) {
+            AATOperator memop = (AATOperator) expression.mem();
+            if (memop.operator() == AATOperator.MINUS) {        //never had AATOperator.PLUS for calls to AATMemory constructor
+                if (memop.left() instanceof AATRegister && memop.right() instanceof AATConstant) {
+                    AATRegister register = (AATRegister) memop.left();
+                    AATConstant constant = (AATConstant) memop.right();
+                    //lw    $ACC, constant(Register)
+                    emit("lw " + Register.ACC() + ", " + -constant.value() + "(" + register.register() + ")");
+                    //TODO: check register.register() actually prints out correctly
+                    //TODO: NOTE: constant must be NEGATIVE because of how we calculated offsets
+                    return null;
+                } else if (memop.right() instanceof AATConstant) {
+                    AATConstant constant = (AATConstant) memop.right();
+                    memop.left().Accept(this);
+                    //lw    $ACC, constant($ACC)
+                    emit("lw " + Register.ACC() + ", " + -constant.value() + "(" + Register.ACC() + ")");
+                    return null;
+                }
+            }
+            //else, fall through
+        }
         
+        //WORST CASE
+        expression.mem().Accept(this);
+        //lw    $ACC, 0($ACC)
+        emit("lw " + Register.ACC() + ", 0(" + Register.ACC() + ")");
+
+        /*
         memop.left().Accept(this);                                                                      //place lhs into ACC    -       Could be Reg or Op (in case of Base Variable)
         emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");                                   //sw    $ACC, 0($ESP)   -       store ACC into top of Expression Stack
         emit("addi " + Register.ESP() + ", " + Register.ESP() + ", "+ (-MachineDependent.WORDSIZE));    //addi  $ESP, $ESP, -4  -       Decrement ESP
@@ -36,8 +62,8 @@ class CodeGenerator implements AATVisitor {
             emit("add " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());             //add   $ACC, $t1, $ACC -       Put LHS Plus Offset into ACC
         }
         
-        emit("lw " + Register.ACC() + ", " + 0 + "(" + Register.ACC() + ")");                           //lw    $ACC, 0($ACC)   -       Put value of LHS+/-Offset into ACC 
-        
+        emit("lw " + Register.ACC() + ", " + 0 + "(" + Register.ACC() + ")");                           //lw    $ACC, 0($ACC)   -       Put value of LHS+/-Offset into ACC
+
         //I THINK WE SHOULD HOLD OFF ON "ARBITRARILY" COMPLICATED MEM TREES FOR NOW BECAUSE WE NEVER CREATED ANY.
         
         /*else {        //Right hand side is not a constant
@@ -49,7 +75,7 @@ class CodeGenerator implements AATVisitor {
         
         
         return null;
-    }
+    }   /* DONE */
     
     
     public Object VisitOperator(AATOperator expression) { 
