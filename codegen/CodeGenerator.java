@@ -54,170 +54,175 @@ class CodeGenerator implements AATVisitor {
     
     public Object VisitOperator(AATOperator expression) { 
         //visit lhs
-        expression.lhs().Accept(this);
+        expression.left().Accept(this);
         //expression.lhs
         //place lhs into ACC    -       Could be Reg or Op (in case of Base Variable)
         emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");                                   //sw    $ACC, 0($ESP)   -       store ACC into top of Expression Stack
         
         //store ACC to stack
-        expression.rhs().Accept(this);
+        expression.right().Accept(this);
         //visit rhs
         //move val from stack to t1
         emit("lw " + Register.Tmp1() + ", " + MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");  //lw    $t1, 4($ESP)    -       Put LHS into T1
         switch (expression.operator()) {
-            case 1:
+            case AATOperator.BAD_OPERATOR:
                 //bad operator
-                return null;
-            case 2:
+                break;
+            case AATOperator.PLUS:
                 //plus
                 emit("add " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
-                
-            case 3:
+                break;
+            case AATOperator.MINUS:
                 //minus
                 emit("sub " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
-                
-            case 4:
+                break;
+            case AATOperator.MULTIPLY:
                 //multiply
                 emit("mult" + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
-            case 5:
+                break;
+            case AATOperator.DIVIDE:
                 emit("div" + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
                 //divide
-                
-            case 6:
+                break;
+            case AATOperator.AND:
                 //1 is true
                 //0 is false
                //and
-               //process the left side and than right side
-               Label new firstandtruelabel = new Label("firstandtruelabel");
-               Label new firstandendlabel = new Label("firstandendlabel");
-               Label new secondandtruelabel = new Label("secondandtruelabel");
-               Label new secondandendlabel = new Label("secondandendlabel");
+               //process the left side and then right side
+               Label firstandtruelabel = new Label("firstandtruelabel");
+               Label firstandendlabel = new Label("firstandendlabel");
+               Label secondandtruelabel = new Label("secondandtruelabel");
+               Label secondandendlabel = new Label("secondandendlabel");
                emit("beq" + Register.ACC() + ", " + 1 + ", " + firstandtruelabel);
                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                emit("j" + firstandendlabel);
-               emit(firstandtruelabel.label() + ":");
+               emit(firstandtruelabel + ":");
                emit("beq" + Register.ACC() + ", " + 1 + ", " + secondandtruelabel);
                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                emit("j" + secondandendlabel);
-               emit(secondandtruelabel.label() + ":");
+               emit(secondandtruelabel + ":");
                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
                emit("j" + secondandendlabel);
-               emit(firstandendlabel.label());
-               emit(secondandendlabel.label());
-            
-            case 7:
+               emit(firstandendlabel + ": ");
+               emit(secondandendlabel + ": ");
+               break;
+            case AATOperator.OR:
                 //1 is true
                 //0 is false
                 //and
                 //process the left side and than right side
-                Label new firstortruelabel = new Label("firstortruelabel");
-                Label new firstorendlabel = new Label("firstorendlabel");
-                Label new secondortruelabel = new Label("secondortruelabel");
-                Label new secondorendlabel = new Label("secondorendlabel");
+                Label firstortruelabel = new Label("firstortruelabel");
+                Label firstorendlabel = new Label("firstorendlabel");
+                Label secondortruelabel = new Label("secondortruelabel");
+                Label secondorendlabel = new Label("secondorendlabel");
                 emit("beq" + Register.ACC() + ", " + 1 + ", " + firstortruelabel);
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                 emit("beq" + Register.ACC() + ", " + 1 + ", " + secondortruelabel);
                 emit("j" + firstorendlabel);
-                emit(firstortruelabel.label() + ":");
+                emit(firstortruelabel + ":");
                 emit("beq" + Register.ACC() + ", " + 1 + ", " + secondortruelabel);
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
                 emit("j" + secondorendlabel);
-                emit(secondortruelabel.label() + ":");
+                emit(secondortruelabel + ":");
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
                 emit("j" + secondorendlabel);
-                emit(firstorendlabel.label());
-                emit(secondorendlabel.label());
+                emit(firstorendlabel + ": ");
+                emit(secondorendlabel + ": ");
+                break;
                 
-                
-            case 8:
+            case AATOperator.EQUAL:
                 //equal
                 //==
-                Label new truelabel = new Label("truelabel");
-                Label new endlabel = new Label("endlabel");
+                Label truelabel = new Label("truelabel");
+                Label endlabel = new Label("endlabel");
                 emit("beq" + Register.Tmp1() + ", " + Register.ACC() + ", " + truelabel);
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                 emit("j" + endlabel);
-                emit(truelabel.label() + ":");
+                emit(truelabel + ":");
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
-                emit(endlabel.label());
+                emit(endlabel + ":");
                 //  end label
+                break;
                 
-                
-            case 9:
+            case AATOperator.NOT_EQUAL:
                 //not_equal
-                Label new netruelabel = new Label("netruelabel");
-                Label new neendlabel = new Label("neendlabel");
+                Label netruelabel = new Label("netruelabel");
+                Label neendlabel = new Label("neendlabel");
                 emit("bne" + Register.Tmp1() + ", " + Register.ACC() + ", " + netruelabel);
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                 emit("j" + neendlabel);
-                emit(netruelabel.label() + ":");
+                emit(netruelabel + ":");
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
-                emit(neendlable.label());
+                emit(neendlabel + ":");
+                break;
                 
-                
-            case 10:
+            case AATOperator.LESS_THAN:
                 //less_than
-                Label new lttruelabel = new Label("lttruelabel");
-                Label new ltendlabel = new Label("ltendlabel");
+                Label lttruelabel = new Label("lttruelabel");
+                Label ltendlabel = new Label("ltendlabel");
                 emit("bltz" + Register.Tmp1() + ", " + Register.ACC() + ", " + lttruelabel);
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                 emit("j" + ltendlabel);
-                emit(lttruelabel.label() + ":");
+                emit(lttruelabel + ":");
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
-                emit(ltendlable.label());
+                emit(ltendlabel + ":");
+                break;
                 
-            case 11:
+            case AATOperator.LESS_THAN_EQUAL:
                 //less_than_equal
-                Label new letruelabel = new Label("letruelabel");
-                Label new leendlabel = new Label("leendlabel");
+                Label letruelabel = new Label("letruelabel");
+                Label leendlabel = new Label("leendlabel");
                 emit("blez" + Register.Tmp1() + ", " + Register.ACC() + ", " + letruelabel);
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                 emit("j" + leendlabel);
-                emit(letruelabel.label() + ":");
+                emit(letruelabel + ":");
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
-                emit(leendlable.label());
+                emit(leendlabel + ":");
+                break;
                 
-            case 12:
+            case AATOperator.GREATER_THAN:
                 //greater_than
-                Label new gttruelabel = new Label("gttruelabel");
-                Label new gtendlabel = new Label("gtendlabel");
+                Label gttruelabel = new Label("gttruelabel");
+                Label gtendlabel = new Label("gtendlabel");
                 emit("bgtz" + Register.Tmp1() + ", " + Register.ACC() + ", " + gttruelabel);
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                 emit("j" + gtendlabel);
-                emit(gttruelabel.label() + ":");
+                emit(gttruelabel + ":");
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
-                emit(gtendlable.label());
+                emit(gtendlabel + ":");
+                break;
                 
-            case 13:
+            case AATOperator.GREATER_THAN_EQUAL:
                 //greater_than_equal
-                Label new getruelabel = new Label("getruelabel");
-                Label new geendlabel = new Label("geendlabel");
+                Label getruelabel = new Label("getruelabel");
+                Label geendlabel = new Label("geendlabel");
                 emit("bgez" + Register.Tmp1() + ", " + Register.ACC() + ", " + getruelabel);
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
                 emit("j" + geendlabel);
-                emit(getruelabel.label() + ":");
+                emit(getruelabel + ":");
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
-                emit(geendlable.label());
+                emit(geendlabel + ":");
+                break;
                 
-            case 14:
+            case AATOperator.NOT:
                 //not
                 //1 is true
                 //0 is false
-                Label new ntruelabel = new Label("ntruelabel");
-                Label new nendlabel = new Label("nendlabel");
+                Label ntruelabel = new Label("ntruelabel");
+                Label nendlabel = new Label("nendlabel");
                 emit("beq" + Register.ACC() + ", " + 1 + ", " + ntruelabel);
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
                 emit("j" + nendlabel);
-                emit(ntruelabel.label() + ":");
+                emit(ntruelabel + ":");
                 emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
-                emit(nendlabel.label());
-                
-                     
+                emit(nendlabel + ":");
+                break;
+        }
         return null;
     }
 
     public Object VisitRegister(AATRegister expression) {
-        emit ("addi " + Register.ACC + ", " + expression.register() + ", " + 0);
+        emit ("addi " + Register.ACC() + ", " + expression.register() + ", " + 0);
         return null;
     }
     
