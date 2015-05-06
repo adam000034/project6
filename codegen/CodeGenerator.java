@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Vector;
 
 class CodeGenerator implements AATVisitor { 
     
@@ -11,10 +12,30 @@ class CodeGenerator implements AATVisitor {
 	/*  Feel free to add code here, if you want to */
 	EmitSetupCode();
     }
-  
+//------------------------------------------------------------------------------------------  
     public Object VisitCallExpression(AATCallExpression expression) {
+        Vector actuals = expression.actuals();
+        int decrementsize = (actuals.size() * MachineDependent.WORDSIZE);
+        int offset = MachineDependent.WORDSIZE;
+
+        //decrement SP to accommodate actuals
+        emit("addi " + Register.SP() + ", " + Register.SP() + ", " + -decrementsize);
+        //put actuals on stack
+        for (int i = 0; i < actuals.size(); i ++) {
+            //call accept on each actual to put it into ACC
+            ((AATExpression) actuals.elementAt(i)).Accept(this);
+            //sw $ACC, offset($SP)
+            emit("sw " + Register.ACC() + ", " + offset + "(" + Register.SP() + ")");
+            offset += MachineDependent.WORDSIZE;
+        }
+        //jal
+        emit("jal " + expression.label());
+        //restore SP
+        emit("addi " + Register.SP() + ", " + Register.SP() + ", " + decrementsize);
+        //Put return val into ACC
+        emit("addi " + Register.ACC() + ", " + Register.Result() + ", 0");
         return null;
-    }
+    }   /* DONE */
   
     public Object VisitMemory(AATMemory expression) {
         
@@ -28,8 +49,7 @@ class CodeGenerator implements AATVisitor {
                     AATConstant constant = (AATConstant) memop.right();
                     //lw    $ACC, constant(Register)
                     emit("lw " + Register.ACC() + ", " + -constant.value() + "(" + register.register() + ")");
-                    //TODO: check register.register() actually prints out correctly
-                    //TODO: NOTE: constant must be NEGATIVE because of how we calculated offsets
+                    //NOTE: constant must be NEGATIVE because of how we calculated offsets
                     return null;
                 } else if (memop.right() instanceof AATConstant) {
                     AATConstant constant = (AATConstant) memop.right();
@@ -45,34 +65,7 @@ class CodeGenerator implements AATVisitor {
         //WORST CASE
         expression.mem().Accept(this);
         //lw    $ACC, 0($ACC)
-        emit("lw " + Register.ACC() + ", 0(" + Register.ACC() + ")");
-
-        /*
-        memop.left().Accept(this);                                                                      //place lhs into ACC    -       Could be Reg or Op (in case of Base Variable)
-        emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");                                   //sw    $ACC, 0($ESP)   -       store ACC into top of Expression Stack
-        emit("addi " + Register.ESP() + ", " + Register.ESP() + ", "+ (-MachineDependent.WORDSIZE));    //addi  $ESP, $ESP, -4  -       Decrement ESP
-        
-        memop.right().Accept(this);                                                                     //place rhs into ACC        
-        emit("lw " + Register.Tmp1() + ", " + MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");  //lw    $t1, 4($ESP)    -       Put LHS into T1
-        emit("addi " + Register.ESP() + ", " + Register.ESP() + ", " + MachineDependent.WORDSIZE);      //addi  $ESP, $ESP, 4   -       Increment ESP
-        
-        if (memop.operator() == AATOperator.MINUS) {
-            emit("sub " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());             //sub   $ACC, $t1, $ACC -       Put LHS Minus Offset into ACC
-        } else if (memop.operator() == AATOperator.PLUS){
-            emit("add " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());             //add   $ACC, $t1, $ACC -       Put LHS Plus Offset into ACC
-        }
-        
-        emit("lw " + Register.ACC() + ", " + 0 + "(" + Register.ACC() + ")");                           //lw    $ACC, 0($ACC)   -       Put value of LHS+/-Offset into ACC
-
-        //I THINK WE SHOULD HOLD OFF ON "ARBITRARILY" COMPLICATED MEM TREES FOR NOW BECAUSE WE NEVER CREATED ANY.
-        
-        /*else {        //Right hand side is not a constant
-            //Else (arbitrarily complicated) -->
-            //      statement.accept(this);
-            //      emit lw $acc, 0 ($acc)
-            emit("lw " + Register.ACC() + ", " + 0 + "(" + Register.ACC() + ")");
-        }*/
-        
+        emit("lw " + Register.ACC() + ", 0(" + Register.ACC() + ")");       
         
         return null;
     }   /* DONE */
@@ -113,25 +106,25 @@ class CodeGenerator implements AATVisitor {
             case AATOperator.AND:
                 //1 is true
                 //0 is false
-               //and
-               //process the left side and then right side
-               Label firstandtruelabel = new Label("firstandtruelabel");
-               Label firstandendlabel = new Label("firstandendlabel");
-               Label secondandtruelabel = new Label("secondandtruelabel");
-               Label secondandendlabel = new Label("secondandendlabel");
-               emit("beq" + Register.ACC() + ", " + 1 + ", " + firstandtruelabel);
-               emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
-               emit("j" + firstandendlabel);
-               emit(firstandtruelabel + ":");
-               emit("beq" + Register.ACC() + ", " + 1 + ", " + secondandtruelabel);
-               emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
-               emit("j" + secondandendlabel);
-               emit(secondandtruelabel + ":");
-               emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
-               emit("j" + secondandendlabel);
-               emit(firstandendlabel + ": ");
-               emit(secondandendlabel + ": ");
-               break;
+                //and
+                //process the left side and then right side
+                Label firstandtruelabel = new Label("firstandtruelabel");
+                Label firstandendlabel = new Label("firstandendlabel");
+                Label secondandtruelabel = new Label("secondandtruelabel");
+                Label secondandendlabel = new Label("secondandendlabel");
+                emit("beq " + Register.ACC() + ", " + 1 + ", " + firstandtruelabel);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j " + firstandendlabel);
+                emit(firstandtruelabel + ":");
+                emit("beq " + Register.ACC() + ", " + 1 + ", " + secondandtruelabel);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j " + secondandendlabel);
+                emit(secondandtruelabel + ":");
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("j " + secondandendlabel);
+                emit(firstandendlabel + ": ");
+                emit(secondandendlabel + ": ");
+                break;
             case AATOperator.OR:
                 //1 is true
                 //0 is false
@@ -141,17 +134,17 @@ class CodeGenerator implements AATVisitor {
                 Label firstorendlabel = new Label("firstorendlabel");
                 Label secondortruelabel = new Label("secondortruelabel");
                 Label secondorendlabel = new Label("secondorendlabel");
-                emit("beq" + Register.ACC() + ", " + 1 + ", " + firstortruelabel);
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
-                emit("beq" + Register.ACC() + ", " + 1 + ", " + secondortruelabel);
-                emit("j" + firstorendlabel);
+                emit("beq " + Register.ACC() + ", " + 1 + ", " + firstortruelabel);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("beq " + Register.ACC() + ", " + 1 + ", " + secondortruelabel);
+                emit("j " + firstorendlabel);
                 emit(firstortruelabel + ":");
-                emit("beq" + Register.ACC() + ", " + 1 + ", " + secondortruelabel);
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
-                emit("j" + secondorendlabel);
+                emit("beq " + Register.ACC() + ", " + 1 + ", " + secondortruelabel);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("j " + secondorendlabel);
                 emit(secondortruelabel + ":");
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
-                emit("j" + secondorendlabel);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("j " + secondorendlabel);
                 emit(firstorendlabel + ": ");
                 emit(secondorendlabel + ": ");
                 break;
@@ -161,11 +154,11 @@ class CodeGenerator implements AATVisitor {
                 //==
                 Label truelabel = new Label("truelabel");
                 Label endlabel = new Label("endlabel");
-                emit("beq" + Register.Tmp1() + ", " + Register.ACC() + ", " + truelabel);
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
-                emit("j" + endlabel);
+                emit("beq " + Register.Tmp1() + ", " + Register.ACC() + ", " + truelabel);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j " + endlabel);
                 emit(truelabel + ":");
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 1);
                 emit(endlabel + ":");
                 //  end label
                 break;
@@ -174,11 +167,11 @@ class CodeGenerator implements AATVisitor {
                 //not_equal
                 Label netruelabel = new Label("netruelabel");
                 Label neendlabel = new Label("neendlabel");
-                emit("bne" + Register.Tmp1() + ", " + Register.ACC() + ", " + netruelabel);
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
-                emit("j" + neendlabel);
+                emit("bne " + Register.Tmp1() + ", " + Register.ACC() + ", " + netruelabel);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j " + neendlabel);
                 emit(netruelabel + ":");
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 1);
                 emit(neendlabel + ":");
                 break;
                 
@@ -186,11 +179,11 @@ class CodeGenerator implements AATVisitor {
                 //less_than
                 Label lttruelabel = new Label("lttruelabel");
                 Label ltendlabel = new Label("ltendlabel");
-                emit("bltz" + Register.Tmp1() + ", " + Register.ACC() + ", " + lttruelabel);
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
-                emit("j" + ltendlabel);
+                emit("bltz " + Register.Tmp1() + ", " + Register.ACC() + ", " + lttruelabel);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j " + ltendlabel);
                 emit(lttruelabel + ":");
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 1);
                 emit(ltendlabel + ":");
                 break;
                 
@@ -210,11 +203,11 @@ class CodeGenerator implements AATVisitor {
                 //greater_than
                 Label gttruelabel = new Label("gttruelabel");
                 Label gtendlabel = new Label("gtendlabel");
-                emit("bgtz" + Register.Tmp1() + ", " + Register.ACC() + ", " + gttruelabel);
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
-                emit("j" + gtendlabel);
+                emit("bgtz " + Register.Tmp1() + ", " + Register.ACC() + ", " + gttruelabel);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j " + gtendlabel);
                 emit(gttruelabel + ":");
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 1);
                 emit(gtendlabel + ":");
                 break;
                 
@@ -222,11 +215,11 @@ class CodeGenerator implements AATVisitor {
                 //greater_than_equal
                 Label getruelabel = new Label("getruelabel");
                 Label geendlabel = new Label("geendlabel");
-                emit("bgez" + Register.Tmp1() + ", " + Register.ACC() + ", " + getruelabel);
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
-                emit("j" + geendlabel);
+                emit("bgez " + Register.Tmp1() + ", " + Register.ACC() + ", " + getruelabel);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("j " + geendlabel);
                 emit(getruelabel + ":");
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 1);
                 emit(geendlabel + ":");
                 break;
                 
@@ -236,61 +229,83 @@ class CodeGenerator implements AATVisitor {
                 //0 is false
                 Label ntruelabel = new Label("ntruelabel");
                 Label nendlabel = new Label("nendlabel");
-                emit("beq" + Register.ACC() + ", " + 1 + ", " + ntruelabel);
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 1);
-                emit("j" + nendlabel);
+                emit("beq " + Register.ACC() + ", " + 1 + ", " + ntruelabel);
+                emit("add i" + Register.ACC() + ", " + 0 + ", " + 1);
+                emit("j " + nendlabel);
                 emit(ntruelabel + ":");
-                emit("addi" + Register.ACC() + ", " + 0 + ", " + 0);
+                emit("addi " + Register.ACC() + ", " + 0 + ", " + 0);
                 emit(nendlabel + ":");
                 break;
         }
         return null;
-    }
+    }   //TODO: finish...
 
     public Object VisitRegister(AATRegister expression) {
-        emit ("addi " + Register.ACC() + ", " + expression.register() + ", " + 0);
+        emit("addi " + Register.ACC() + ", " + expression.register() + ", " + 0);
         return null;
-    }
+    }   /* DONE */
     
     public Object VisitCallStatement(AATCallStatement statement) {
+        Vector actuals = statement.actuals();
+        int decrementsize = (actuals.size() * MachineDependent.WORDSIZE);
+        int offset = MachineDependent.WORDSIZE;
+
+        //decrement SP to accomodate actuals
+        emit("addi " + Register.SP() + ", " + Register.SP() + ", " + -decrementsize);
+        //put actuals on stack
+        for (int i = 0; i < actuals.size(); i ++) {
+            //call accept on each actual to put it into ACC
+            ((AATExpression) actuals.elementAt(i)).Accept(this);
+            //sw $ACC, offset($SP)
+            emit("sw " + Register.ACC() + ", " + offset + "(" + Register.SP() + ")");
+            offset += MachineDependent.WORDSIZE;
+        }
+        //jal
+        emit("jal " + statement.label());
+        //restore SP
+        emit("addi " + Register.SP() + ", " + Register.SP() + ", " + decrementsize);
         return null;
-    }
+    }   /* DONE */
+    
     public Object VisitConditionalJump(AATConditionalJump statement) {
+        //put outcome of test into ACC
+        statement.test().Accept(this);
+        //check ACC, branch to label if test resolved to 1
+        emit("beq " + statement.label() + ", " + Register.ACC() + ", 1");
         return null;
-    }
+    }   /* DONE */
     
     public Object VisitEmpty(AATEmpty statement) {
         return null;
-        //DONE
-    }
+    }   /* DONE */
+    
     public Object VisitJump(AATJump statement) {
 	emit("j " + statement.label());
 	return null;
-    }
+    }   /* DONE */
+    
     public Object VisitLabel(AATLabel statement) {
 	emit(statement.label() + ":");
 	return null;
-    }
+    }   /* DONE */
+    
     public Object VisitMove(AATMove statement) {
         //Memory Location
         if (statement.lhs() instanceof AATMemory) {
             AATMemory lhs = (AATMemory) statement.lhs();
-            
-            //I'M WONDERING IF WE EVEN NEED THIS FIRST IF-CLAUSE, BECUASE WON'T LHS.MEM().ACCEPT(THIS) AUTOMATICALLY PUT THE LHS MEM INTO ACC regardless if it's op or direct register??
-            
+                        
             if (lhs.mem() instanceof AATOperator) {     //Operator in lhs
                 //cast as an operator
                 AATOperator lhsop = (AATOperator) lhs.mem();
                 //if LHS is a register, RHS is a constant...also checked if +/-
-                if (((lhsop.operator() == AATOperator.PLUS) || (lhsop.operator() == AATOperator.MINUS)) 
+                if (((lhsop.operator() == AATOperator.MINUS))   /*(lhsop.operator() == AATOperator.PLUS) ||*/  
                         && (lhsop.left() instanceof AATRegister) 
                         && (lhsop.right() instanceof AATConstant)) {
-                    //AATRegister reg
+                    AATRegister reg = (AATRegister) lhsop.left();
                     AATConstant offset = (AATConstant) lhsop.right();
-                    //TODO: FINISH THIS
                     //emit code for small tile
-                    //statement.rhs().Accept(this);
-                    //emit("sw " + Register.ACC() + offset + "(" + Register + ")";
+                    statement.rhs().Accept(this);
+                    emit("sw " + Register.ACC() + ", " + -(offset.value()) + "(" + reg.register() + ")");
                 }
             } else {
                 lhs.mem().Accept(this); //outputs code that when executed, will put value of memaddr into ACC
@@ -302,13 +317,13 @@ class CodeGenerator implements AATVisitor {
                 emit ("sw " + Register.ACC() + ", 0(" + Register.Tmp1() + ")");        //store ACC into addr at t1
             }
         //Register
-        }  else {
+        } else {
             AATRegister lhs = (AATRegister) statement.lhs();
             statement.rhs().Accept(this);
-            emit("addi " + lhs.register() + "," + Register.ACC() +",0");
+            emit("addi " + lhs.register() + ", " + Register.ACC() +", 0");
         }
         return null;             
-    }
+    }   /* DONE */
     
     
     public Object VisitReturn(AATReturn statement) {
@@ -323,8 +338,10 @@ class CodeGenerator implements AATVisitor {
     }   /* DONE */
     
     public Object VisitSequential(AATSequential statement) {
+        statement.left().Accept(this);
+        statement.right().Accept(this);
         return null;
-    }
+    }   /* DONE */
     
     public Object VisitConstant(AATConstant expression) {
         emit ("sw " + expression.value() + ", 0(" + Register.ACC() + ")");
