@@ -77,10 +77,13 @@ class CodeGenerator implements AATVisitor {
         //expression.lhs
         //place lhs into ACC    -       Could be Reg or Op (in case of Base Variable)
         emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");                                   //sw    $ACC, 0($ESP)   -       store ACC into top of Expression Stack
-        
+        emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + (-MachineDependent.WORDSIZE));
+
         //store ACC to stack
         expression.right().Accept(this);
         //visit rhs
+        emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + (MachineDependent.WORDSIZE));
+
         //move val from stack to t1
         emit("lw " + Register.Tmp1() + ", " + MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");  //lw    $t1, 4($ESP)    -       Put LHS into T1
         switch (expression.operator()) {
