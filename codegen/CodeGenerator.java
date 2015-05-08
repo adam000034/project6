@@ -85,7 +85,7 @@ class CodeGenerator implements AATVisitor {
         emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + (MachineDependent.WORDSIZE));
 
         //move val from stack to t1
-        emit("lw " + Register.Tmp1() + ", " + MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");  //lw    $t1, 4($ESP)    -       Put LHS into T1
+        emit("lw " + Register.Tmp1() + ", " + "0(" + Register.ESP() + ")");  //lw    $t1, 4($ESP)    -       Put LHS into T1
         switch (expression.operator()) {
             case AATOperator.BAD_OPERATOR:
                 //bad operator
