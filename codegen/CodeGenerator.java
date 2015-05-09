@@ -239,7 +239,7 @@ class CodeGenerator implements AATVisitor {
     }   /* DONE */
     
     public Object VisitMove(AATMove statement) {
-        emit("#NEW CODE");
+        emit("#NEW MOVE");
         //Memory Location
         if (statement.lhs() instanceof AATMemory) {
             AATMemory lhs = (AATMemory) statement.lhs();
@@ -251,24 +251,32 @@ class CodeGenerator implements AATVisitor {
                 if (((lhsop.operator() == AATOperator.MINUS))   /*(lhsop.operator() == AATOperator.PLUS) ||*/  
                         && (lhsop.left() instanceof AATRegister) 
                         && (lhsop.right() instanceof AATConstant)) {
+                    emit("#BIGGEST MOVE TILE");
                     AATRegister reg = (AATRegister) lhsop.left();
                     AATConstant offset = (AATConstant) lhsop.right();
                     //emit code for small tile
                     statement.rhs().Accept(this);
                     emit("sw " + Register.ACC() + ", " + -(offset.value()) + "(" + reg.register() + ")");
+                //when lhsop.right() IS NOT A CONSTANT?
+                } else {
+                    return VisitMoveMemWorstCase(lhs, statement);
                 }
-                //TODO: what about when lhsop.right() IS NOT A CONSTANT?
+            //when lhs of mem is not a register
             } else {
-                lhs.mem().Accept(this); //outputs code that when executed, will put value of memaddr into ACC
-                emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");   //Save ACC onto Stack
-                emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + (-MachineDependent.WORDSIZE));
-                statement.rhs().Accept(this);   //puts into ACC
-                emit("lw " + Register.Tmp1() + ", " + MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");  //emit("lw...)(load value into t1 - lw $t1, ($ESP)
-                emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + MachineDependent.WORDSIZE);   //emit - move esp back up
-                emit ("sw " + Register.ACC() + ", 0(" + Register.Tmp1() + ")");        //store ACC into addr at t1
+                return VisitMoveMemWorstCase(lhs, statement);
             }
         //Register
         } else {
+            /*  TODO:
+             *          Move
+             *      /           \
+             *      Reg         Op
+             *               /      \
+             *              Reg    Const
+             *              
+             *      Code: addi reg, reg, (-const)
+             */
+
             AATRegister lhs = (AATRegister) statement.lhs();
             statement.rhs().Accept(this);
             emit("addi " + lhs.register() + ", " + Register.ACC() +", 0");
@@ -276,6 +284,16 @@ class CodeGenerator implements AATVisitor {
         return null;             
     }   /* DONE */
     
+    public Object VisitMoveMemWorstCase(AATMemory lhs, AATMove statement) {
+        lhs.mem().Accept(this); //outputs code that when executed, will put value of memaddr into ACC
+        emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");   //Save ACC onto Stack
+        emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + (-MachineDependent.WORDSIZE));
+        statement.rhs().Accept(this);   //puts into ACC
+        emit("lw " + Register.Tmp1() + ", " + MachineDependent.WORDSIZE + "(" + Register.ESP() + ")");  //emit("lw...)(load value into t1 - lw $t1, ($ESP)
+        emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + MachineDependent.WORDSIZE);   //emit - move esp back up
+        emit ("sw " + Register.ACC() + ", 0(" + Register.Tmp1() + ")");        //store ACC into addr at t1
+        return null;
+    }
     
     public Object VisitReturn(AATReturn statement) {
 	emit("jr " + Register.ReturnAddr());

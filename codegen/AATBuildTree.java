@@ -29,10 +29,12 @@ public class AATBuildTree {
                             new AATMemory(
                                     operatorExpression(
                                             sp, 
-                                            operatorExpression(
+                                            /*operatorExpression(
                                                     framesizetree,
                                                     wordsize,
                                                     AATOperator.PLUS),
+                                            */
+                                            constantExpression(framesize + MachineDependent.WORDSIZE),
                                             AATOperator.MINUS
                                     )
                             ),
@@ -43,7 +45,7 @@ public class AATBuildTree {
                             new AATMemory(
                                     operatorExpression(
                                             sp,
-                                            operatorExpression( //framesize + 8
+                                            /*operatorExpression( //framesize + 8
                                                     framesizetree,
                                                     operatorExpression(     //2 * WORDSIZE = 8
                                                             wordsize,
@@ -51,7 +53,8 @@ public class AATBuildTree {
                                                             AATOperator.MULTIPLY
                                                     ),
                                                     AATOperator.PLUS
-                                            ),
+                                            ),*/
+                                            constantExpression(framesize + (2 * MachineDependent.WORDSIZE)),     
                                             AATOperator.MINUS
                                     )
                             ),
@@ -67,7 +70,7 @@ public class AATBuildTree {
                                         sp,
                                         operatorExpression(
                                                 sp,
-                                                operatorExpression(     //framesize + 12
+                                                /*operatorExpression(     //framesize + 12
                                                         framesizetree,
                                                         operatorExpression(
                                                                 wordsize,
@@ -75,7 +78,8 @@ public class AATBuildTree {
                                                                 AATOperator.MULTIPLY
                                                         ),
                                                         AATOperator.PLUS
-                                                ),
+                                                ),*/
+                                                constantExpression(framesize + (3* MachineDependent.WORDSIZE)),     
                                                 AATOperator.MINUS
                                         )
                                     );
@@ -87,7 +91,7 @@ public class AATBuildTree {
                 new AATMemory(
                         operatorExpression(
                                 fp,
-                                operatorExpression( //framesize + 8
+                                /*operatorExpression( //framesize + 8
                                         framesizetree,
                                         operatorExpression(     //2 * WORDSIZE = 8
                                                 wordsize,
@@ -95,7 +99,8 @@ public class AATBuildTree {
                                                 AATOperator.MULTIPLY
                                         ),
                                         AATOperator.PLUS
-                                ),
+                                ),*/
+                                constantExpression(framesize + (2 * MachineDependent.WORDSIZE)),     
                                 AATOperator.MINUS
                         )
                 )
@@ -106,10 +111,12 @@ public class AATBuildTree {
                 new AATMemory(
                         operatorExpression(
                                 fp, 
-                                operatorExpression(
+                                /*operatorExpression(
                                         framesizetree,
                                         wordsize,
                                         AATOperator.PLUS),
+                                */
+                                constantExpression(framesize + MachineDependent.WORDSIZE),     
                                 AATOperator.MINUS
                         )
                 )
