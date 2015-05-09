@@ -85,9 +85,10 @@ class CodeGenerator implements AATVisitor {
             expression.right().Accept(this);
             //visit rhs
             emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + (MachineDependent.WORDSIZE));
+            //move val from stack to t1
+            emit("lw " + Register.Tmp1() + ", " + "0(" + Register.ESP() + ")");  //lw    $t1, 4($ESP)    -       Put LHS into T1
+            
         }
-        //move val from stack to t1
-        emit("lw " + Register.Tmp1() + ", " + "0(" + Register.ESP() + ")");  //lw    $t1, 4($ESP)    -       Put LHS into T1
         switch (expression.operator()) {
             case AATOperator.BAD_OPERATOR:
                 //bad operator
@@ -238,6 +239,7 @@ class CodeGenerator implements AATVisitor {
     }   /* DONE */
     
     public Object VisitMove(AATMove statement) {
+        emit("#NEW CODE");
         //Memory Location
         if (statement.lhs() instanceof AATMemory) {
             AATMemory lhs = (AATMemory) statement.lhs();
@@ -255,6 +257,7 @@ class CodeGenerator implements AATVisitor {
                     statement.rhs().Accept(this);
                     emit("sw " + Register.ACC() + ", " + -(offset.value()) + "(" + reg.register() + ")");
                 }
+                //TODO: what about when lhsop.right() IS NOT A CONSTANT?
             } else {
                 lhs.mem().Accept(this); //outputs code that when executed, will put value of memaddr into ACC
                 emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");   //Save ACC onto Stack
