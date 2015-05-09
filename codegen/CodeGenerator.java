@@ -120,10 +120,10 @@ class CodeGenerator implements AATVisitor {
                 Label andendlabel = new Label("andendlabel");
                 emit("beq " + Register.Tmp1() + ", " + 0 + ", " + andfalselabel);	//	beq $t1, 0, falselabel
                 emit("beq " + Register.ACC() + ", " + 0 + ", " + andfalselabel);	//	beq $ACC, 0, falselabel
-                emit("li " + Register.ACC() + ", " + 1);		//	addi $ACC, 1, 0
+                emit("li " + ", " + Register.ACC() + ", " + 1);		//	addi $ACC, 1, 0
                 emit("j " + andendlabel);						//	j endlabel
                 emit(andfalselabel + ":");						//falselabel:
-                emit("li " + Register.ACC() + ", " + 0);		//	addi $ACC, 0, 0
+                emit("li " + ", " + Register.ACC() + ", " + 0);		//	addi $ACC, 0, 0
                 emit(andendlabel + ": ");						//endlabel:
                 break;
             case AATOperator.OR:
@@ -135,10 +135,10 @@ class CodeGenerator implements AATVisitor {
                 Label orendlabel = new Label("orendlabel");
                 emit("beq " + Register.Tmp1() + ", " + 1 + ", " + ortruelabel);	//	beq $t1, 1, truelabel
                 emit("beq " + Register.ACC() + ", " + 1 + ", " + ortruelabel);	//	beq $ACC, 1, truelabel
-                emit("li " + Register.ACC() + ", " + 0);		//	addi $ACC, 0, 0
+                emit("li " + ", " + Register.ACC() + ", " + 0);		//	addi $ACC, 0, 0
                 emit("j " + orendlabel);						//	j endlabel
                 emit(ortruelabel + ":");						//truelabel:
-                emit("li " + Register.ACC() + ", " + 1);		//	addi $ACC, 1, 0
+                emit("li " + ", " + Register.ACC() + ", " + 1);		//	addi $ACC, 1, 0
                 emit(orendlabel + ": ");						//endlabel:
                 break;
             case AATOperator.EQUAL:
@@ -179,10 +179,10 @@ class CodeGenerator implements AATVisitor {
                 Label ntruelabel = new Label("ntruelabel");
                 Label nendlabel = new Label("nendlabel");
                 emit("beq " + Register.ACC() + ", " + 1 + ", " + ntruelabel);
-                emit("li" + Register.ACC() + ", " + 1);
+                emit("li" + ", " + Register.ACC() + ", " + 1);
                 emit("j " + nendlabel);
                 emit(ntruelabel + ":");
-                emit("li " + Register.ACC() + ", " + 0);
+                emit("li " + ", " + Register.ACC() + ", " + 0);
                 emit(nendlabel + ":");
                 break;
         }
@@ -313,7 +313,7 @@ class CodeGenerator implements AATVisitor {
     }   /* DONE */
     
     public Object VisitConstant(AATConstant expression) {
-        emit ("li " + Register.ACC() + ", " + expression.value());
+        emit ("li " + ", " + Register.ACC() + ", " + expression.value());
         //addi $ACC, 0, value
         return null;
     }   /* DONE */
