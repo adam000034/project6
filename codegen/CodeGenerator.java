@@ -102,10 +102,12 @@ class CodeGenerator implements AATVisitor {
                 break;
             case AATOperator.MULTIPLY:
                 //multiply
-                emit("mult " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
+                emit("mult " + Register.Tmp1() + ", " + Register.ACC());
+                emit("mflo " + Register.ACC());
                 break;
             case AATOperator.DIVIDE:
                 emit("div " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
+                emit("mflo " + Register.ACC());
                 //divide
                 break;
             case AATOperator.AND:

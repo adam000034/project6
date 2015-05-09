@@ -27,7 +27,8 @@ foo1:
 	li $t0, 3
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
-	mult $t0, $t2, $t0
+	mult $t2, $t0
+	mflo $t0
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	add $t0, $t2, $t0
@@ -51,7 +52,8 @@ foo2:
 	li $t0, 2
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
-	mult $t0, $t2, $t0
+	mult $t2, $t0
+	mflo $t0
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	add $t0, $t2, $t0
@@ -95,7 +97,8 @@ main1:
 	li $t0, 3
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
-	mult $t0, $t2, $t0
+	mult $t2, $t0
+	mflo $t0
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	add $t0, $t2, $t0
@@ -134,7 +137,8 @@ main2:
 	li $t0, 2
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
-	mult $t0, $t2, $t0
+	mult $t2, $t0
+	mflo $t0
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	add $t0, $t2, $t0
