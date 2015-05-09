@@ -220,7 +220,7 @@ class CodeGenerator implements AATVisitor {
         //put outcome of test into ACC
         statement.test().Accept(this);
         //check ACC, branch to label if test resolved to 1
-        emit("beq " + statement.label() + ", " + Register.ACC() + ", 1");
+        emit("beq " + Register.ACC() + ", " + 1 + ", " + statement.label());
         return null;
     }   /* DONE */
     
