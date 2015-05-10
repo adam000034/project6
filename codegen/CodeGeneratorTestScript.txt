@@ -1,0 +1,49 @@
+java sjc test1.sjava
+java sjc test2.sjava
+java sjc test3.sjava
+java sjc test4.sjava
+java sjc semantictest/booltest.sjava
+java sjc semantictest/connect4-1P.sjava
+java sjc semantictest/connect4-2P.sjava
+java sjc semantictest/fact.sjava
+java sjc semantictest/GCD.sjava
+java sjc semantictest/heaptest1.sjava
+java sjc semantictest/heaptest2.sjava
+java sjc semantictest/heaptest3.sjava
+java sjc semantictest/primes.sjava
+java sjc semantictest/queens.sjava
+java sjc semantictest/test01.sjava
+wc -l test1.sjava.s
+wc -l test2.sjava.s
+wc -l test3.sjava.s
+wc -l test4.sjava.s
+wc -l semantictest/booltest.sjava.s
+wc -l semantictest/connect4-1P.sjava.s
+wc -l semantictest/connect4-2P.sjava.s
+wc -l semantictest/fact.sjava.s
+wc -l semantictest/GCD.sjava.s
+wc -l semantictest/heaptest1.sjava.s
+wc -l semantictest/heaptest2.sjava.s
+wc -l semantictest/heaptest3.sjava.s
+wc -l semantictest/primes.sjava.s
+wc -l semantictest/queens.sjava.s
+wc -l semantictest/interpreter.sjava.s
+
+
+
+85 test1.sjava.s
+171 test2.sjava.s
+136 test3.sjava.s
+279 test4.sjava.s
+267 semantictest/booltest.sjava.s
+6820 semantictest/connect4-1P.sjava.s
+1473 semantictest/connect4-2P.sjava.s
+112 semantictest/fact.sjava.s
+171 semantictest/GCD.sjava.s
+136 semantictest/heaptest1.sjava.s
+279 semantictest/heaptest2.sjava.s
+464 semantictest/heaptest3.sjava.s
+440 semantictest/primes.sjava.s
+472 semantictest/queens.sjava.s
+2029 semantictest/interpreter.sjava.s
+
