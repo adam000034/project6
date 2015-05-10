@@ -239,7 +239,7 @@ class CodeGenerator implements AATVisitor {
     }   /* DONE */
     
     public Object VisitMove(AATMove statement) {
-        emit("#NEW MOVE");
+        //emit("#NEW MOVE");
         //Memory Location
         if (statement.lhs() instanceof AATMemory) {
             AATMemory lhs = (AATMemory) statement.lhs();
@@ -251,12 +251,17 @@ class CodeGenerator implements AATVisitor {
                 if (((lhsop.operator() == AATOperator.MINUS))   /*(lhsop.operator() == AATOperator.PLUS) ||*/  
                         && (lhsop.left() instanceof AATRegister) 
                         && (lhsop.right() instanceof AATConstant)) {
-                    emit("#BIGGEST MOVE TILE");
+                    //emit("#BIGGEST MOVE TILE");
                     AATRegister reg = (AATRegister) lhsop.left();
                     AATConstant offset = (AATConstant) lhsop.right();
                     //emit code for small tile
-                    statement.rhs().Accept(this);
-                    emit("sw " + Register.ACC() + ", " + -(offset.value()) + "(" + reg.register() + ")");
+                    if (statement.rhs() instanceof AATRegister) {
+                        AATRegister regright = (AATRegister) statement.rhs();
+                        emit("sw " + regright.register() + ", " + -(offset.value()) + "(" + reg.register() + ")");
+                    } else {
+                        statement.rhs().Accept(this);
+                        emit("sw " + Register.ACC() + ", " + -(offset.value()) + "(" + reg.register() + ")");
+                    }
                 //when lhsop.right() IS NOT A CONSTANT?
                 } else {
                     return VisitMoveMemWorstCase(lhs, statement);
@@ -267,7 +272,7 @@ class CodeGenerator implements AATVisitor {
             }
         //Register
         } else {
-            /*  TODO:
+            /* 
              *          Move
              *      /           \
              *      Reg         Op
@@ -276,10 +281,84 @@ class CodeGenerator implements AATVisitor {
              *              
              *      Code: addi reg, reg, (-const)
              */
+            if (statement.rhs() instanceof AATOperator) {
+                AATOperator rhsop = (AATOperator) statement.rhs();
+                //if LHS is a register, RHS is a constant...also checked if +/-
+                if (((rhsop.operator() == AATOperator.MINUS))   /*(lhsop.operator() == AATOperator.PLUS) ||*/  
+                        && (rhsop.left() instanceof AATRegister) 
+                        && (rhsop.right() instanceof AATConstant)) {
+                    //emit("#DECREMENT REGISTER");
+                    AATRegister reg = (AATRegister) rhsop.left();
+                    AATConstant cons = (AATConstant) rhsop.right();
+                    emit("addi " + reg.register() + ", " + reg.register() + ", " + -(cons.value()));
+                } else {
+                    return VisitMoveRegWorstCase(statement);
+                }
+            /* 
+             *          Move
+             *      /           \
+             *      Reg         Reg
 
-            AATRegister lhs = (AATRegister) statement.lhs();
-            statement.rhs().Accept(this);
-            emit("addi " + lhs.register() + ", " + Register.ACC() +", 0");
+             *      Code: addi reg, reg, 0
+             */
+            } else if (statement.rhs() instanceof AATRegister) {
+                //addi fp, sp, 0
+                AATRegister regleft = (AATRegister) statement.lhs();
+                AATRegister regright = (AATRegister) statement.rhs();
+                emit("addi " + regleft.register() + ", " + regright.register() + ", 0");
+            /* 
+             *          Move
+             *      /           \
+             *      Reg        Const
+             *      
+             *      Code: li reg, const
+             */
+            } else if (statement.rhs() instanceof AATConstant) {
+                AATRegister regleft = (AATRegister) statement.lhs();
+                AATConstant cons = (AATConstant) statement.rhs();
+                emit("li " + regleft.register() + ", " + cons.value());
+            /* 
+             *          Move
+             *      /           \
+             *      Reg         Mem
+             */
+            } else if (statement.rhs() instanceof AATMemory) {
+                AATMemory rhs = (AATMemory) statement.rhs();
+                
+                if (rhs.mem() instanceof AATOperator) {     //Operator in lhs
+                    //cast as an operator
+                    AATOperator rhsop = (AATOperator) rhs.mem();
+                    //if LHS is a register, RHS is a constant...also checked if +/-
+                    if (((rhsop.operator() == AATOperator.MINUS))   /*(lhsop.operator() == AATOperator.PLUS) ||*/  
+                            && (rhsop.left() instanceof AATRegister) 
+                            && (rhsop.right() instanceof AATConstant)) {
+                        //emit("#BIGGEST MOVE TILE");
+                        AATRegister reg = (AATRegister) rhsop.left();
+                        AATConstant offset = (AATConstant) rhsop.right();
+                        //emit code for small tile
+                        if (statement.lhs() instanceof AATRegister) {
+                            AATRegister regleft = (AATRegister) statement.lhs();
+                            emit("lw " + regleft.register() + ", " + -(offset.value()) + "(" + reg.register() + ")");
+                        } else {
+                            statement.lhs().Accept(this);
+                            emit("lw " + Register.ACC() + ", " + -(offset.value()) + "(" + reg.register() + ")");
+                        }
+                    //when rhsop.right() IS NOT A CONSTANT?
+                    } else {
+                        return VisitMoveRegWorstCase(statement);
+                    }
+                //when lhs of mem is not a register
+                } else {
+                    return VisitMoveRegWorstCase(statement);
+                }
+            /* 
+             *          Move
+             *      /           \
+             *      Reg         ?
+             */
+            } else {
+                return VisitMoveRegWorstCase(statement);
+            }
         }
         return null;             
     }   /* DONE */
@@ -294,6 +373,14 @@ class CodeGenerator implements AATVisitor {
         emit ("sw " + Register.ACC() + ", 0(" + Register.Tmp1() + ")");        //store ACC into addr at t1
         return null;
     }
+    
+    public Object VisitMoveRegWorstCase(AATMove statement) {
+        AATRegister lhs = (AATRegister) statement.lhs();
+        statement.rhs().Accept(this);
+        emit("addi " + lhs.register() + ", " + Register.ACC() +", 0");
+        return null;
+    }
+    
     
     public Object VisitReturn(AATReturn statement) {
 	emit("jr " + Register.ReturnAddr());

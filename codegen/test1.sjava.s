@@ -11,68 +11,26 @@ main:
 	li $v0, 10
 	syscall
 foo1:
-	#NEW CODE
-	addi $t0, $fp, 0
-	sw $t0, 0($sp)
-	#NEW CODE
-	addi $t0, $sp, 0
-	sw $t0, -4($sp)
-	#NEW CODE
-	addi $t0, $ra, 0
-	sw $t0, -8($sp)
-	#NEW CODE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW CODE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li $t0, 12
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
-	#NEW CODE
-	li $t0, 4
-	addi $v0, $t0, 0
+	sw $fp, 0($sp)
+	sw $sp, -4($sp)
+	sw $ra, -8($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -12
+	li $v0, 4
 	j foo2
 foo2:
-	#NEW CODE
-	lw $t0, -8($fp)
-	addi $ra, $t0, 0
-	#NEW CODE
-	lw $t0, -4($fp)
-	addi $sp, $t0, 0
-	#NEW CODE
-	lw $t0, 0($fp)
-	addi $fp, $t0, 0
+	lw $ra, -8($fp)
+	lw $sp, -4($fp)
+	lw $fp, 0($fp)
 	jr $ra
 main1:
-	#NEW CODE
-	addi $t0, $fp, 0
-	sw $t0, -4($sp)
-	#NEW CODE
-	addi $t0, $sp, 0
-	sw $t0, -8($sp)
-	#NEW CODE
-	addi $t0, $ra, 0
-	sw $t0, -12($sp)
-	#NEW CODE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW CODE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li $t0, 16
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
-	#NEW CODE
-	li $t0, 3
+	sw $fp, -4($sp)
+	sw $sp, -8($sp)
+	sw $ra, -12($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -16
+	li , $t0, 3
 	sw $t0, 0($fp)
-	#NEW CODE
 	lw $t0, 0($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -90,15 +48,9 @@ main1:
 	jal Print
 	addi $sp, $sp, 4
 main2:
-	#NEW CODE
-	lw $t0, -12($fp)
-	addi $ra, $t0, 0
-	#NEW CODE
-	lw $t0, -8($fp)
-	addi $sp, $t0, 0
-	#NEW CODE
-	lw $t0, -4($fp)
-	addi $fp, $t0, 0
+	lw $ra, -12($fp)
+	lw $sp, -8($fp)
+	lw $fp, -4($fp)
 	jr $ra
 Print:
 	lw $a0, 4($sp)
