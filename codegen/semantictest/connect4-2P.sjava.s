@@ -11,48 +11,19 @@ main:
 	li $v0, 10
 	syscall
 main1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, -28($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -32($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -36($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 40
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
-	#NEW MOVE
-	#BIGGEST MOVE TILE
+	sw $fp, -28($sp)
+	sw $sp, -32($sp)
+	sw $ra, -36($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -40
 	li , $t0, 0
 	sw $t0, -8($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 1
 	sw $t0, -12($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -20($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -24($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	addi $sp, $sp, -4
 	li , $t0, 10
 	sw $t0, 0($t1)
@@ -67,13 +38,10 @@ main1:
 	addi $sp, $sp, 4
 	addi $t0, $v0, 0
 	sw $t0, 0($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -4($fp)
 	j fortest1
 forstart1:
-	#NEW MOVE
 	lw $t0, 0($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -106,15 +74,8 @@ forstart1:
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 fortest1:
 	lw $t0, -4($fp)
@@ -138,8 +99,6 @@ whilestart1:
 	jal PrintBoard1
 	addi $sp, $sp, 4
 dowhilestart1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	addi $sp, $sp, 0
 	jal Read
 	addi $sp, $sp, 0
@@ -170,15 +129,8 @@ nendlabel1:
 	sw $t0, 12($sp)
 	jal DoMove1
 	addi $sp, $sp, 12
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -20($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -20($fp)
 	addi $sp, $sp, -8
 	lw $t0, 0($fp)
@@ -191,12 +143,8 @@ nendlabel1:
 	beq $t0, 1, iftrue1
 	j ifend1
 iftrue1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 1
 	sw $t0, -8($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
 	sw $t0, -24($fp)
 ifend1:
@@ -210,17 +158,11 @@ ifend1:
 	beq $t0, 1, iftrue2
 	j ifend2
 iftrue2:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 1
 	sw $t0, -8($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -24($fp)
 ifend2:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	addi $sp, $sp, -4
 	lw $t0, -12($fp)
 	sw $t0, 4($sp)
@@ -257,41 +199,16 @@ nendlabel2:
 	jal Println
 	addi $sp, $sp, 0
 main2:
-	#NEW MOVE
-	lw $t0, -36($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -32($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, -28($fp)
-	addi $fp, $t0, 0
+	lw $ra, -36($fp)
+	lw $sp, -32($fp)
+	lw $fp, -28($fp)
 	jr $ra
 legal1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, 0($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -4($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -8($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 12
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
+	sw $fp, 0($sp)
+	sw $sp, -4($sp)
+	sw $ra, -8($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -12
 	lw $t0, 4($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -320,9 +237,7 @@ orendlabel1:
 	beq $t0, 1, iftrue3
 	j ifend3
 iftrue3:
-	#NEW MOVE
-	li , $t0, 0
-	addi $v0, $t0, 0
+	li $v0, 0
 	j legal2
 ifend3:
 	lw $t0, 8($fp)
@@ -363,64 +278,30 @@ ifend3:
 	beq $t0, 1, iftrue4
 	j ifend4
 iftrue4:
-	#NEW MOVE
-	li , $t0, 0
-	addi $v0, $t0, 0
+	li $v0, 0
 	j legal2
 ifend4:
-	#NEW MOVE
-	li , $t0, 1
-	addi $v0, $t0, 0
+	li $v0, 1
 	j legal2
 legal2:
-	#NEW MOVE
-	lw $t0, -8($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -4($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, 0($fp)
-	addi $fp, $t0, 0
+	lw $ra, -8($fp)
+	lw $sp, -4($fp)
+	lw $fp, 0($fp)
 	jr $ra
 ClearBoard1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, -8($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -12($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -16($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 20
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
-	#NEW MOVE
-	#BIGGEST MOVE TILE
+	sw $fp, -8($sp)
+	sw $sp, -12($sp)
+	sw $ra, -16($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -20
 	li , $t0, 0
 	sw $t0, 0($fp)
 	j fortest3
 forstart3:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -4($fp)
 	j fortest2
 forstart2:
-	#NEW MOVE
 	lw $t0, 4($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -455,15 +336,8 @@ forstart2:
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 fortest2:
 	lw $t0, -4($fp)
@@ -474,15 +348,8 @@ fortest2:
 	lw $t2, 0($t1)
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart2
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest3:
 	lw $t0, 0($fp)
@@ -494,49 +361,20 @@ fortest3:
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart3
 ClearBoard2:
-	#NEW MOVE
-	lw $t0, -16($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -12($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, -8($fp)
-	addi $fp, $t0, 0
+	lw $ra, -16($fp)
+	lw $sp, -12($fp)
+	lw $fp, -8($fp)
 	jr $ra
 PrintBoard1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, -8($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -12($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -16($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 20
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
-	#NEW MOVE
-	#BIGGEST MOVE TILE
+	sw $fp, -8($sp)
+	sw $sp, -12($sp)
+	sw $ra, -16($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -20
 	li , $t0, 0
 	sw $t0, 0($fp)
 	j fortest5
 forstart5:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -4($fp)
 	j fortest4
@@ -574,15 +412,8 @@ forstart4:
 	sw $t0, 4($sp)
 	jal Print
 	addi $sp, $sp, 4
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 fortest4:
 	lw $t0, -4($fp)
@@ -596,15 +427,8 @@ fortest4:
 	addi $sp, $sp, 0
 	jal Println
 	addi $sp, $sp, 0
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest5:
 	lw $t0, 0($fp)
@@ -618,8 +442,6 @@ fortest5:
 	addi $sp, $sp, 0
 	jal Println
 	addi $sp, $sp, 0
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, 0($fp)
 	j fortest6
@@ -629,15 +451,8 @@ forstart6:
 	sw $t0, 4($sp)
 	jal Print
 	addi $sp, $sp, 4
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest6:
 	lw $t0, 0($fp)
@@ -655,41 +470,16 @@ fortest6:
 	jal Println
 	addi $sp, $sp, 0
 PrintBoard2:
-	#NEW MOVE
-	lw $t0, -16($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -12($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, -8($fp)
-	addi $fp, $t0, 0
+	lw $ra, -16($fp)
+	lw $sp, -12($fp)
+	lw $fp, -8($fp)
 	jr $ra
 swap1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, 0($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -4($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -8($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 12
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
+	sw $fp, 0($sp)
+	sw $sp, -4($sp)
+	sw $ra, -8($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -12
 	lw $t0, 4($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -698,55 +488,24 @@ swap1:
 	lw $t2, 0($t1)
 	seq $t0, $t2, $t0
 	beq $t0, 1, iftrue5
-	#NEW MOVE
-	li , $t0, 1
-	addi $v0, $t0, 0
+	li $v0, 1
 	j swap2
 	j ifend5
 iftrue5:
-	#NEW MOVE
-	li , $t0, 2
-	addi $v0, $t0, 0
+	li $v0, 2
 	j swap2
 ifend5:
 swap2:
-	#NEW MOVE
-	lw $t0, -8($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -4($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, 0($fp)
-	addi $fp, $t0, 0
+	lw $ra, -8($fp)
+	lw $sp, -4($fp)
+	lw $fp, 0($fp)
 	jr $ra
 DoMove1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, -4($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -8($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -12($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 16
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
-	#NEW MOVE
-	#BIGGEST MOVE TILE
+	sw $fp, -4($sp)
+	sw $sp, -8($sp)
+	sw $ra, -12($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -16
 	li , $t0, 1
 	sw $t0, 0($fp)
 	j fortest7
@@ -789,7 +548,6 @@ forstart7:
 	beq $t0, 1, iftrue6
 	j ifend6
 iftrue6:
-	#NEW MOVE
 	lw $t0, 4($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -797,12 +555,7 @@ iftrue6:
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	mult $t2, $t0
@@ -830,20 +583,11 @@ iftrue6:
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
-	li , $t0, 0
-	addi $v0, $t0, 0
+	li $v0, 0
 	j DoMove2
 ifend6:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest7:
 	lw $t0, 0($fp)
@@ -854,7 +598,6 @@ fortest7:
 	lw $t2, 0($t1)
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart7
-	#NEW MOVE
 	lw $t0, 4($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -890,56 +633,22 @@ fortest7:
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
 DoMove2:
-	#NEW MOVE
-	lw $t0, -12($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -8($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, -4($fp)
-	addi $fp, $t0, 0
+	lw $ra, -12($fp)
+	lw $sp, -8($fp)
+	lw $fp, -4($fp)
 	jr $ra
 win1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, -16($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -20($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -24($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 28
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
-	#NEW MOVE
-	#BIGGEST MOVE TILE
+	sw $fp, -16($sp)
+	sw $sp, -20($sp)
+	sw $ra, -24($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -28
 	li , $t0, 0
 	sw $t0, 0($fp)
 	j fortest8
 forstart8:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest8:
 	lw $t0, 0($fp)
@@ -996,13 +705,9 @@ andendlabel1:
 	beq $t0, 1, iftrue7
 	j ifend7
 iftrue7:
-	#NEW MOVE
-	li , $t0, 0
-	addi $v0, $t0, 0
+	li $v0, 0
 	j win2
 ifend7:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, 4($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -1033,35 +738,17 @@ ifend7:
 	sub $t0, $t2, $t0
 	lw $t0, 0($t0)
 	sw $t0, -8($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -4($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -12($fp)
 	j whiletest2
 whilestart2:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest2:
 	lw $t0, 0($fp)
@@ -1121,40 +808,20 @@ andendlabel2:
 	beq $t0, 1, iftrue8
 	j ifend8
 iftrue8:
-	#NEW MOVE
-	li , $t0, 1
-	addi $v0, $t0, 0
+	li $v0, 1
 	j win2
 ifend8:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -4($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -12($fp)
 	j whiletest3
 whilestart3:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest3:
 	lw $t0, 8($fp)
@@ -1204,31 +871,15 @@ andfalselabel3:
 	li , $t0, 0
 andendlabel3:
 	beq $t0, 1, whilestart3
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 1
 	sw $t0, -12($fp)
 	j whiletest4
 whilestart4:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest4:
 	lw $t0, 8($fp)
@@ -1288,40 +939,20 @@ andendlabel4:
 	beq $t0, 1, iftrue9
 	j ifend9
 iftrue9:
-	#NEW MOVE
-	li , $t0, 1
-	addi $v0, $t0, 0
+	li $v0, 1
 	j win2
 ifend9:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -12($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -4($fp)
 	j whiletest5
 whilestart5:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest5:
 	lw $t0, 8($fp)
@@ -1401,31 +1032,15 @@ andfalselabel6:
 	li , $t0, 0
 andendlabel6:
 	beq $t0, 1, whilestart5
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 1
 	sw $t0, -12($fp)
 	j whiletest6
 whilestart6:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest6:
 	lw $t0, 8($fp)
@@ -1515,40 +1130,20 @@ andendlabel8:
 	beq $t0, 1, iftrue10
 	j ifend10
 iftrue10:
-	#NEW MOVE
-	li , $t0, 1
-	addi $v0, $t0, 0
+	li $v0, 1
 	j win2
 ifend10:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -12($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 0
 	sw $t0, -4($fp)
 	j whiletest7
 whilestart7:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest7:
 	lw $t0, 8($fp)
@@ -1628,31 +1223,15 @@ andfalselabel10:
 	li , $t0, 0
 andendlabel10:
 	beq $t0, 1, whilestart7
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	li , $t0, 1
 	sw $t0, -12($fp)
 	j whiletest8
 whilestart8:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest8:
 	lw $t0, 8($fp)
@@ -1742,51 +1321,22 @@ andendlabel12:
 	beq $t0, 1, iftrue11
 	j ifend11
 iftrue11:
-	#NEW MOVE
-	li , $t0, 1
-	addi $v0, $t0, 0
+	li $v0, 1
 	j win2
 ifend11:
-	#NEW MOVE
-	li , $t0, 0
-	addi $v0, $t0, 0
+	li $v0, 0
 	j win2
 win2:
-	#NEW MOVE
-	lw $t0, -24($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -20($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, -16($fp)
-	addi $fp, $t0, 0
+	lw $ra, -24($fp)
+	lw $sp, -20($fp)
+	lw $fp, -16($fp)
 	jr $ra
 GetBoard1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, 0($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -4($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -8($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 12
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
+	sw $fp, 0($sp)
+	sw $sp, -4($sp)
+	sw $ra, -8($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -12
 	lw $t0, 8($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -1851,12 +1401,9 @@ orendlabel4:
 	beq $t0, 1, iftrue12
 	j ifend12
 iftrue12:
-	#NEW MOVE
-	li , $t0, 0
-	addi $v0, $t0, 0
+	li $v0, 0
 	j GetBoard2
 ifend12:
-	#NEW MOVE
 	lw $t0, 4($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -1889,15 +1436,9 @@ ifend12:
 	addi $v0, $t0, 0
 	j GetBoard2
 GetBoard2:
-	#NEW MOVE
-	lw $t0, -8($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -4($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, 0($fp)
-	addi $fp, $t0, 0
+	lw $ra, -8($fp)
+	lw $sp, -4($fp)
+	lw $fp, 0($fp)
 	jr $ra
 Print:
 	lw $a0, 4($sp)

@@ -82,12 +82,7 @@ forstart1:
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 fortest1:
 	lw $t0, -4($fp)
@@ -173,12 +168,7 @@ ifend1:
 	jal PrintBoard1
 	addi $sp, $sp, 4
 	lw $t0, -20($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -20($fp)
 	addi $sp, $sp, -8
 	lw $t0, 0($fp)
@@ -513,12 +503,7 @@ forstart2:
 	add $t0, $t2, $t0
 	sw $t0, -52($fp)
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 fortest2:
 	lw $t0, -4($fp)
@@ -530,12 +515,7 @@ fortest2:
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart2
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest3:
 	lw $t0, 0($fp)
@@ -824,12 +804,7 @@ forstart4:
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 fortest4:
 	lw $t0, -4($fp)
@@ -841,12 +816,7 @@ fortest4:
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart4
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest5:
 	lw $t0, 0($fp)
@@ -910,12 +880,7 @@ forstart6:
 	jal Print
 	addi $sp, $sp, 4
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 fortest6:
 	lw $t0, -4($fp)
@@ -930,12 +895,7 @@ fortest6:
 	jal Println
 	addi $sp, $sp, 0
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest7:
 	lw $t0, 0($fp)
@@ -959,12 +919,7 @@ forstart8:
 	jal Print
 	addi $sp, $sp, 4
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest8:
 	lw $t0, 0($fp)
@@ -1067,12 +1022,7 @@ iftrue7:
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	mult $t2, $t0
@@ -1104,12 +1054,7 @@ iftrue7:
 	j DoMove2
 ifend7:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest9:
 	lw $t0, 0($fp)
@@ -1245,12 +1190,7 @@ iftrue8:
 	j UndoMove2
 ifend8:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest10:
 	lw $t0, 0($fp)
@@ -1277,12 +1217,7 @@ win1:
 	j fortest11
 forstart11:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 fortest11:
 	lw $t0, 0($fp)
@@ -1379,20 +1314,10 @@ ifend9:
 	j whiletest2
 whilestart2:
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest2:
 	addi $sp, $sp, -12
@@ -1438,20 +1363,10 @@ ifend10:
 	j whiletest3
 whilestart3:
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest3:
 	addi $sp, $sp, -12
@@ -1482,20 +1397,10 @@ whiletest3:
 	j whiletest4
 whilestart4:
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest4:
 	addi $sp, $sp, -12
@@ -1541,20 +1446,10 @@ ifend11:
 	j whiletest5
 whilestart5:
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest5:
 	addi $sp, $sp, -12
@@ -1591,20 +1486,10 @@ whiletest5:
 	j whiletest6
 whilestart6:
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest6:
 	addi $sp, $sp, -12
@@ -1656,20 +1541,10 @@ ifend12:
 	j whiletest7
 whilestart7:
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest7:
 	addi $sp, $sp, -12
@@ -1706,20 +1581,10 @@ whiletest7:
 	j whiletest8
 whilestart8:
 	lw $t0, -4($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -4($fp)
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 whiletest8:
 	addi $sp, $sp, -12
@@ -1951,12 +1816,7 @@ ifend15:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -1984,12 +1844,7 @@ andendlabel2:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -2015,12 +1870,7 @@ andendlabel3:
 	j ifend16
 iftrue16:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend16:
 	addi $sp, $sp, -12
@@ -2047,12 +1897,7 @@ ifend16:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2080,12 +1925,7 @@ andendlabel4:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2109,12 +1949,7 @@ andendlabel5:
 	j ifend17
 iftrue17:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend17:
 	addi $sp, $sp, -12
@@ -2139,20 +1974,10 @@ ifend17:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2178,20 +2003,10 @@ andendlabel6:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2215,12 +2030,7 @@ andendlabel7:
 	j ifend18
 iftrue18:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend18:
 	addi $sp, $sp, -12
@@ -2245,20 +2055,10 @@ ifend18:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2284,20 +2084,10 @@ andendlabel8:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2321,12 +2111,7 @@ andendlabel9:
 	j ifend19
 iftrue19:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend19:
 	lw $v0, 0($fp)
@@ -2407,12 +2192,7 @@ ifend20:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -2436,12 +2216,7 @@ ifend20:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -2478,12 +2253,7 @@ andendlabel10:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -2511,12 +2281,7 @@ andendlabel11:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -2542,12 +2307,7 @@ andendlabel12:
 	j ifend21
 iftrue21:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend21:
 	addi $sp, $sp, -12
@@ -2574,12 +2334,7 @@ ifend21:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2603,12 +2358,7 @@ ifend21:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2645,12 +2395,7 @@ andendlabel13:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2678,12 +2423,7 @@ andendlabel14:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2707,12 +2447,7 @@ andendlabel15:
 	j ifend22
 iftrue22:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend22:
 	addi $sp, $sp, -12
@@ -2737,20 +2472,10 @@ ifend22:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2772,20 +2497,10 @@ ifend22:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2820,20 +2535,10 @@ andendlabel16:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2859,20 +2564,10 @@ andendlabel17:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2896,12 +2591,7 @@ andendlabel18:
 	j ifend23
 iftrue23:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend23:
 	addi $sp, $sp, -12
@@ -2926,20 +2616,10 @@ ifend23:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -2961,20 +2641,10 @@ ifend23:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3009,20 +2679,10 @@ andendlabel19:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3048,20 +2708,10 @@ andendlabel20:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3085,12 +2735,7 @@ andendlabel21:
 	j ifend24
 iftrue24:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend24:
 	addi $sp, $sp, -12
@@ -3115,12 +2760,7 @@ ifend24:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -3148,12 +2788,7 @@ andendlabel22:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -3181,12 +2816,7 @@ andendlabel23:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -3210,12 +2840,7 @@ andendlabel23:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -3250,12 +2875,7 @@ andendlabel24:
 	j ifend25
 iftrue25:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend25:
 	addi $sp, $sp, -12
@@ -3282,12 +2902,7 @@ ifend25:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3315,12 +2930,7 @@ andendlabel25:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3348,12 +2958,7 @@ andendlabel26:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3377,12 +2982,7 @@ andendlabel26:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3415,12 +3015,7 @@ andendlabel27:
 	j ifend26
 iftrue26:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend26:
 	addi $sp, $sp, -12
@@ -3445,20 +3040,10 @@ ifend26:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3484,20 +3069,10 @@ andendlabel28:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3523,20 +3098,10 @@ andendlabel29:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3558,20 +3123,10 @@ andendlabel29:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3604,12 +3159,7 @@ andendlabel30:
 	j ifend27
 iftrue27:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend27:
 	addi $sp, $sp, -12
@@ -3634,20 +3184,10 @@ ifend27:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3673,20 +3213,10 @@ andendlabel31:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3712,20 +3242,10 @@ andendlabel32:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3747,20 +3267,10 @@ andendlabel32:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -3793,12 +3303,7 @@ andendlabel33:
 	j ifend28
 iftrue28:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend28:
 	lw $v0, 0($fp)
@@ -3879,12 +3384,7 @@ ifend29:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -3912,12 +3412,7 @@ andendlabel34:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -3945,12 +3440,7 @@ andendlabel35:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -3976,12 +3466,7 @@ andendlabel36:
 	j ifend30
 iftrue30:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend30:
 	addi $sp, $sp, -12
@@ -4008,12 +3493,7 @@ ifend30:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4041,12 +3521,7 @@ andendlabel37:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4074,12 +3549,7 @@ andendlabel38:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4103,12 +3573,7 @@ andendlabel39:
 	j ifend31
 iftrue31:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend31:
 	addi $sp, $sp, -12
@@ -4133,20 +3598,10 @@ ifend31:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4172,20 +3627,10 @@ andendlabel40:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4211,20 +3656,10 @@ andendlabel41:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4248,12 +3683,7 @@ andendlabel42:
 	j ifend32
 iftrue32:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend32:
 	addi $sp, $sp, -12
@@ -4278,20 +3708,10 @@ ifend32:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4317,20 +3737,10 @@ andendlabel43:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4356,20 +3766,10 @@ andendlabel44:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4393,12 +3793,7 @@ andendlabel45:
 	j ifend33
 iftrue33:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend33:
 	lw $v0, 0($fp)
@@ -4479,12 +3874,7 @@ ifend34:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -4508,12 +3898,7 @@ ifend34:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -4550,12 +3935,7 @@ andendlabel46:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -4583,12 +3963,7 @@ andendlabel47:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -4616,12 +3991,7 @@ andendlabel48:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -4647,12 +4017,7 @@ andendlabel49:
 	j ifend35
 iftrue35:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend35:
 	addi $sp, $sp, -12
@@ -4679,12 +4044,7 @@ ifend35:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4708,12 +4068,7 @@ ifend35:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4750,12 +4105,7 @@ andendlabel50:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4783,12 +4133,7 @@ andendlabel51:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4816,12 +4161,7 @@ andendlabel52:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4845,12 +4185,7 @@ andendlabel53:
 	j ifend36
 iftrue36:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend36:
 	addi $sp, $sp, -12
@@ -4875,20 +4210,10 @@ ifend36:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4910,20 +4235,10 @@ ifend36:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4958,20 +4273,10 @@ andendlabel54:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -4997,20 +4302,10 @@ andendlabel55:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5036,20 +4331,10 @@ andendlabel56:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5073,12 +4358,7 @@ andendlabel57:
 	j ifend37
 iftrue37:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend37:
 	addi $sp, $sp, -12
@@ -5103,20 +4383,10 @@ ifend37:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5138,20 +4408,10 @@ ifend37:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5186,20 +4446,10 @@ andendlabel58:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5225,20 +4475,10 @@ andendlabel59:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5264,20 +4504,10 @@ andendlabel60:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5301,12 +4531,7 @@ andendlabel61:
 	j ifend38
 iftrue38:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend38:
 	addi $sp, $sp, -12
@@ -5331,12 +4556,7 @@ ifend38:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -5364,12 +4584,7 @@ andendlabel62:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -5397,12 +4612,7 @@ andendlabel63:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -5430,12 +4640,7 @@ andendlabel64:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -5459,12 +4664,7 @@ andendlabel64:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -5499,12 +4699,7 @@ andendlabel65:
 	j ifend39
 iftrue39:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend39:
 	addi $sp, $sp, -12
@@ -5531,12 +4726,7 @@ ifend39:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5564,12 +4754,7 @@ andendlabel66:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5597,12 +4782,7 @@ andendlabel67:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5630,12 +4810,7 @@ andendlabel68:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5659,12 +4834,7 @@ andendlabel68:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5697,12 +4867,7 @@ andendlabel69:
 	j ifend40
 iftrue40:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend40:
 	addi $sp, $sp, -12
@@ -5727,20 +4892,10 @@ ifend40:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5766,20 +4921,10 @@ andendlabel70:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5805,20 +4950,10 @@ andendlabel71:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5844,20 +4979,10 @@ andendlabel72:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5879,20 +5004,10 @@ andendlabel72:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5925,12 +5040,7 @@ andendlabel73:
 	j ifend41
 iftrue41:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend41:
 	addi $sp, $sp, -12
@@ -5955,20 +5065,10 @@ ifend41:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -5994,20 +5094,10 @@ andendlabel74:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6033,20 +5123,10 @@ andendlabel75:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6072,20 +5152,10 @@ andendlabel76:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6107,20 +5177,10 @@ andendlabel76:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6153,12 +5213,7 @@ andendlabel77:
 	j ifend42
 iftrue42:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend42:
 	lw $v0, 0($fp)
@@ -6239,12 +5294,7 @@ ifend43:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -6272,12 +5322,7 @@ andendlabel78:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -6305,12 +5350,7 @@ andendlabel79:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -6338,12 +5378,7 @@ andendlabel80:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -6369,12 +5404,7 @@ andendlabel81:
 	j ifend44
 iftrue44:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend44:
 	addi $sp, $sp, -12
@@ -6401,12 +5431,7 @@ ifend44:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6434,12 +5459,7 @@ andendlabel82:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6467,12 +5487,7 @@ andendlabel83:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6500,12 +5515,7 @@ andendlabel84:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6529,12 +5539,7 @@ andendlabel85:
 	j ifend45
 iftrue45:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend45:
 	addi $sp, $sp, -12
@@ -6559,20 +5564,10 @@ ifend45:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6598,20 +5593,10 @@ andendlabel86:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6637,20 +5622,10 @@ andendlabel87:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6676,20 +5651,10 @@ andendlabel88:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6713,12 +5678,7 @@ andendlabel89:
 	j ifend46
 iftrue46:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend46:
 	addi $sp, $sp, -12
@@ -6743,20 +5703,10 @@ ifend46:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6782,20 +5732,10 @@ andendlabel90:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6821,20 +5761,10 @@ andendlabel91:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6860,20 +5790,10 @@ andendlabel92:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -6897,12 +5817,7 @@ andendlabel93:
 	j ifend47
 iftrue47:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend47:
 	lw $v0, 0($fp)
@@ -6983,12 +5898,7 @@ ifend48:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -7016,12 +5926,7 @@ andendlabel94:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -7049,12 +5954,7 @@ andendlabel95:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -7080,12 +5980,7 @@ andendlabel96:
 	j ifend49
 iftrue49:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend49:
 	addi $sp, $sp, -12
@@ -7112,12 +6007,7 @@ ifend49:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -7145,12 +6035,7 @@ andendlabel97:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -7178,12 +6063,7 @@ andendlabel98:
 	lw $t0, 8($fp)
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -7207,12 +6087,7 @@ andendlabel99:
 	j ifend50
 iftrue50:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend50:
 	addi $sp, $sp, -12
@@ -7237,20 +6112,10 @@ ifend50:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -7276,20 +6141,10 @@ andendlabel100:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -7315,20 +6170,10 @@ andendlabel101:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -7352,12 +6197,7 @@ andendlabel102:
 	j ifend51
 iftrue51:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend51:
 	addi $sp, $sp, -12
@@ -7382,20 +6222,10 @@ ifend51:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 2
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 2
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 2
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -7421,20 +6251,10 @@ andendlabel103:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 3
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 3
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 3
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -7460,20 +6280,10 @@ andendlabel104:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 4
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 4
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 4
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 4
 	sw $t0, 12($sp)
 	jal GetBoard1
 	addi $sp, $sp, 12
@@ -7497,12 +6307,7 @@ andendlabel105:
 	j ifend52
 iftrue52:
 	lw $t0, 0($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, 0($fp)
 ifend52:
 	lw $v0, 0($fp)
@@ -7523,12 +6328,7 @@ GetComputerMove1:
 	j fortest12
 forstart12:
 	lw $t0, -8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -8($fp)
 fortest12:
 	addi $sp, $sp, -8
@@ -7572,12 +6372,7 @@ nendlabel3:
 	jal UndoMove1
 	addi $sp, $sp, 8
 	lw $t0, -8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -8($fp)
 	j fortest13
 forstart13:
@@ -7620,12 +6415,7 @@ ifend53:
 	jal UndoMove1
 	addi $sp, $sp, 8
 	lw $t0, -8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -8($fp)
 fortest13:
 	lw $t0, -8($fp)
@@ -7660,12 +6450,7 @@ min1:
 	j ifend54
 iftrue54:
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 4
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	addi $sp, $sp, -4
@@ -7678,21 +6463,11 @@ iftrue54:
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
 	lw $t0, 12($fp)
+	subi $t0, $t0, 0
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	li , $t0, 0
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
@@ -7704,12 +6479,7 @@ ifend54:
 	j fortest14
 forstart14:
 	lw $t0, -8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -8($fp)
 fortest14:
 	addi $sp, $sp, -8
@@ -7742,12 +6512,7 @@ nendlabel4:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -7764,12 +6529,7 @@ nendlabel4:
 	jal UndoMove1
 	addi $sp, $sp, 8
 	lw $t0, -8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -8($fp)
 	j fortest15
 forstart15:
@@ -7786,12 +6546,7 @@ forstart15:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -7823,12 +6578,7 @@ ifend55:
 	jal UndoMove1
 	addi $sp, $sp, 8
 	lw $t0, -8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -8($fp)
 fortest15:
 	lw $t0, -8($fp)
@@ -7840,12 +6590,7 @@ fortest15:
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart15
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 0
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 0
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, -4($fp)
@@ -7853,12 +6598,7 @@ fortest15:
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 4
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, 0($fp)
@@ -7887,12 +6627,7 @@ max1:
 	j ifend56
 iftrue56:
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 4
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	addi $sp, $sp, -4
@@ -7905,21 +6640,11 @@ iftrue56:
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
 	lw $t0, 12($fp)
+	subi $t0, $t0, 0
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	li , $t0, 0
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
@@ -7931,12 +6656,7 @@ ifend56:
 	j fortest16
 forstart16:
 	lw $t0, -8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -8($fp)
 fortest16:
 	addi $sp, $sp, -8
@@ -7969,12 +6689,7 @@ nendlabel5:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -7991,12 +6706,7 @@ nendlabel5:
 	jal UndoMove1
 	addi $sp, $sp, 8
 	lw $t0, -8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -8($fp)
 	j fortest17
 forstart17:
@@ -8013,12 +6723,7 @@ forstart17:
 	lw $t0, 4($fp)
 	sw $t0, 4($sp)
 	lw $t0, 8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 1
 	sw $t0, 8($sp)
 	lw $t0, 12($fp)
 	sw $t0, 12($sp)
@@ -8050,12 +6755,7 @@ ifend57:
 	jal UndoMove1
 	addi $sp, $sp, 8
 	lw $t0, -8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -8($fp)
 fortest17:
 	lw $t0, -8($fp)
@@ -8067,12 +6767,7 @@ fortest17:
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart17
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 0
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 0
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, -4($fp)
@@ -8080,12 +6775,7 @@ fortest17:
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
 	lw $t0, 12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 4
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, 0($fp)

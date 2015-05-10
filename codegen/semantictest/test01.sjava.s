@@ -11,45 +11,19 @@ main:
 	li $v0, 10
 	syscall
 main1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, -24($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -28($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -32($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 36
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
-	#NEW MOVE
+	sw $fp, -24($sp)
+	sw $sp, -28($sp)
+	sw $ra, -32($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -36
 	lw $t0, -8($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 4
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, -4($fp)
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
 	lw $t0, -8($fp)
 	lw $t0, -4($t0)
 	lw $t0, 0($t0)
@@ -67,19 +41,13 @@ main1:
 	lw $t2, 0($t1)
 	sub $t0, $t2, $t0
 	lw $t0, 0($t0)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 0
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 0
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	li , $t0, 4
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
 	lw $t0, -8($fp)
 	lw $t0, -8($t0)
 	sw $t0, 0($t1)
@@ -146,7 +114,6 @@ main1:
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
 	lw $t0, -8($fp)
 	lw $t0, -8($t0)
 	sw $t0, 0($t1)
@@ -195,12 +162,7 @@ main1:
 	lw $t2, 0($t1)
 	sub $t0, $t2, $t0
 	lw $t0, 0($t0)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 4
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
+	subi $t0, $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, -12($fp)
@@ -252,7 +214,6 @@ main1:
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
 	lw $t0, -12($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -273,7 +234,6 @@ main1:
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
 	lw $t0, -12($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -308,8 +268,6 @@ main1:
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -16($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -326,7 +284,6 @@ main1:
 	sub $t0, $t2, $t0
 	lw $t0, 0($t0)
 	sw $t0, -20($fp)
-	#NEW MOVE
 	lw $t0, -12($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -362,15 +319,9 @@ main1:
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
 main2:
-	#NEW MOVE
-	lw $t0, -32($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -28($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, -24($fp)
-	addi $fp, $t0, 0
+	lw $ra, -32($fp)
+	lw $sp, -28($fp)
+	lw $fp, -24($fp)
 	jr $ra
 Print:
 	lw $a0, 4($sp)

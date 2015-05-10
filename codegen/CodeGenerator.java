@@ -75,8 +75,10 @@ class CodeGenerator implements AATVisitor {
         //visit lhs
         expression.left().Accept(this);
         //expression.lhs
-        
-        if (expression.operator() != AATOperator.NOT) {
+        boolean rightaccepted = false;
+        if ((expression.operator() != AATOperator.NOT) && 
+                !((expression.operator() == AATOperator.PLUS || expression.operator() == AATOperator.MINUS) && expression.right() instanceof AATConstant)) {
+            rightaccepted = true;
             //place lhs into ACC    -       Could be Reg or Op (in case of Base Variable)
             emit("sw " + Register.ACC() + ", 0(" + Register.ESP() + ")");                                   //sw    $ACC, 0($ESP)   -       store ACC into top of Expression Stack
             emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + (-MachineDependent.WORDSIZE));
@@ -87,7 +89,6 @@ class CodeGenerator implements AATVisitor {
             emit("addi " + Register.ESP() + "," + Register.ESP() + ", " + (MachineDependent.WORDSIZE));
             //move val from stack to t1
             emit("lw " + Register.Tmp1() + ", " + "0(" + Register.ESP() + ")");  //lw    $t1, 4($ESP)    -       Put LHS into T1
-            
         }
         switch (expression.operator()) {
             case AATOperator.BAD_OPERATOR:
@@ -95,11 +96,21 @@ class CodeGenerator implements AATVisitor {
                 break;
             case AATOperator.PLUS:
                 //plus
-                emit("add " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
+                if (rightaccepted) {
+                    emit("add " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
+                } else {
+                    AATConstant con = (AATConstant) expression.right();
+                    emit("addi " + Register.ACC() + ", " + Register.ACC() + ", " + con.value());
+                }
                 break;
             case AATOperator.MINUS:
                 //minus
-                emit("sub " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
+                if (rightaccepted) {
+                    emit("sub " + Register.ACC() + ", " + Register.Tmp1() + ", " + Register.ACC());
+                } else {
+                    AATConstant con = (AATConstant) expression.right();
+                    emit("subi " + Register.ACC() + ", " + Register.ACC() + ", " + con.value());
+                }
                 break;
             case AATOperator.MULTIPLY:
                 //multiply

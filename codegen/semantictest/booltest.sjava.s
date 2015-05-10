@@ -11,30 +11,11 @@ main:
 	li $v0, 10
 	syscall
 PrintBoolean1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, 0($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -4($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -8($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 12
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
+	sw $fp, 0($sp)
+	sw $sp, -4($sp)
+	sw $ra, -8($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -12
 	lw $t0, 4($fp)
 	beq $t0, 1, iftrue1
 	addi $sp, $sp, -4
@@ -51,42 +32,16 @@ iftrue1:
 	addi $sp, $sp, 4
 ifend1:
 PrintBoolean2:
-	#NEW MOVE
-	lw $t0, -8($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -4($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, 0($fp)
-	addi $fp, $t0, 0
+	lw $ra, -8($fp)
+	lw $sp, -4($fp)
+	lw $fp, 0($fp)
 	jr $ra
 MakeBool1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, 0($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -4($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -8($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 12
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
-	#NEW MOVE
+	sw $fp, 0($sp)
+	sw $sp, -4($sp)
+	sw $ra, -8($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -12
 	lw $t0, 4($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
@@ -97,52 +52,23 @@ MakeBool1:
 	addi $v0, $t0, 0
 	j MakeBool2
 MakeBool2:
-	#NEW MOVE
-	lw $t0, -8($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -4($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, 0($fp)
-	addi $fp, $t0, 0
+	lw $ra, -8($fp)
+	lw $sp, -4($fp)
+	lw $fp, 0($fp)
 	jr $ra
 main1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, -16($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -20($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -24($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li , $t0, 28
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
+	sw $fp, -16($sp)
+	sw $sp, -20($sp)
+	sw $ra, -24($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -28
 	j whiletest1
 whilestart1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	addi $sp, $sp, 0
 	jal Read
 	addi $sp, $sp, 0
 	addi $t0, $v0, 0
 	sw $t0, 0($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	addi $sp, $sp, 0
 	jal Read
 	addi $sp, $sp, 0
@@ -217,8 +143,6 @@ whilestart1:
 	addi $sp, $sp, 0
 	jal Println
 	addi $sp, $sp, 0
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	addi $sp, $sp, -4
 	lw $t0, 0($fp)
 	sw $t0, 4($sp)
@@ -226,8 +150,6 @@ whilestart1:
 	addi $sp, $sp, 4
 	addi $t0, $v0, 0
 	sw $t0, -8($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	addi $sp, $sp, -4
 	lw $t0, -4($fp)
 	sw $t0, 4($sp)
@@ -308,15 +230,9 @@ whiletest1:
 	li , $t0, 1
 	beq $t0, 1, whilestart1
 main2:
-	#NEW MOVE
-	lw $t0, -24($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -20($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, -16($fp)
-	addi $fp, $t0, 0
+	lw $ra, -24($fp)
+	lw $sp, -20($fp)
+	lw $fp, -16($fp)
 	jr $ra
 Print:
 	lw $a0, 4($sp)

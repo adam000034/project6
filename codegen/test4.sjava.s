@@ -11,37 +11,16 @@ main:
 	li $v0, 10
 	syscall
 main1:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $fp, 0
-	sw $t0, -20($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $sp, 0
-	sw $t0, -24($sp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	addi $t0, $ra, 0
-	sw $t0, -28($sp)
-	#NEW MOVE
-	addi $t0, $sp, 0
-	addi $fp, $t0, 0
-	#NEW MOVE
-	addi $t0, $sp, 0
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li $t0, 32
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	sub $t0, $t2, $t0
-	addi $sp, $t0, 0
-	#NEW MOVE
-	#BIGGEST MOVE TILE
+	sw $fp, -20($sp)
+	sw $sp, -24($sp)
+	sw $ra, -28($sp)
+	addi $fp, $sp, 0
+	addi $sp, $sp, -32
 	addi $sp, $sp, -4
-	li $t0, 3
+	li , $t0, 3
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 4
+	li , $t0, 4
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	mult $t2, $t0
@@ -51,13 +30,11 @@ main1:
 	addi $sp, $sp, 4
 	addi $t0, $v0, 0
 	sw $t0, -8($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	addi $sp, $sp, -4
-	li $t0, 10
+	li , $t0, 10
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 4
+	li , $t0, 4
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	mult $t2, $t0
@@ -67,21 +44,16 @@ main1:
 	addi $sp, $sp, 4
 	addi $t0, $v0, 0
 	sw $t0, 0($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, 0($fp)
 	sw $t0, -4($fp)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	li $t0, 0
+	li , $t0, 0
 	sw $t0, -12($fp)
 	j fortest1
 forstart1:
-	#NEW MOVE
 	lw $t0, -8($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 4
+	li , $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, -12($fp)
@@ -95,10 +67,10 @@ forstart1:
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	addi $sp, $sp, -4
-	li $t0, 3
+	li , $t0, 3
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 4
+	li , $t0, 4
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	mult $t2, $t0
@@ -110,42 +82,30 @@ forstart1:
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 fortest1:
 	lw $t0, -12($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 3
+	li , $t0, 3
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart1
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	li $t0, 0
+	li , $t0, 0
 	sw $t0, -12($fp)
 	j fortest3
 forstart3:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	li $t0, 0
+	li , $t0, 0
 	sw $t0, -16($fp)
 	j fortest2
 forstart2:
-	#NEW MOVE
 	lw $t0, -8($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 4
+	li , $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, -12($fp)
@@ -159,7 +119,7 @@ forstart2:
 	lw $t0, 0($t0)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 4
+	li , $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, -16($fp)
@@ -175,7 +135,7 @@ forstart2:
 	lw $t0, -12($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 10
+	li , $t0, 10
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	mult $t2, $t0
@@ -189,53 +149,35 @@ forstart2:
 	lw $t2, 4($t1)
 	addi $t1,$t1, 4
 	sw $t0, 0($t2)
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -16($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -16($fp)
 fortest2:
 	lw $t0, -16($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 3
+	li , $t0, 3
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart2
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 fortest3:
 	lw $t0, -12($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 3
+	li , $t0, 3
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart3
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	li $t0, 0
+	li , $t0, 0
 	sw $t0, -12($fp)
 	j fortest5
 forstart5:
-	#NEW MOVE
-	#BIGGEST MOVE TILE
-	li $t0, 0
+	li , $t0, 0
 	sw $t0, -16($fp)
 	j fortest4
 forstart4:
@@ -243,7 +185,7 @@ forstart4:
 	lw $t0, -8($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 4
+	li , $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, -12($fp)
@@ -257,7 +199,7 @@ forstart4:
 	lw $t0, 0($t0)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 4
+	li , $t0, 4
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
 	lw $t0, -16($fp)
@@ -272,21 +214,14 @@ forstart4:
 	sw $t0, 4($sp)
 	jal Print
 	addi $sp, $sp, 4
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -16($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -16($fp)
 fortest4:
 	lw $t0, -16($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 3
+	li , $t0, 3
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	slt $t0, $t2, $t0
@@ -294,35 +229,22 @@ fortest4:
 	addi $sp, $sp, 0
 	jal Println
 	addi $sp, $sp, 0
-	#NEW MOVE
-	#BIGGEST MOVE TILE
 	lw $t0, -12($fp)
-	sw $t0, 0($t1)
-	addi $t1,$t1, -4
-	li $t0, 1
-	addi $t1,$t1, 4
-	lw $t2, 0($t1)
-	add $t0, $t2, $t0
+	addi $t0, $t0, 1
 	sw $t0, -12($fp)
 fortest5:
 	lw $t0, -12($fp)
 	sw $t0, 0($t1)
 	addi $t1,$t1, -4
-	li $t0, 3
+	li , $t0, 3
 	addi $t1,$t1, 4
 	lw $t2, 0($t1)
 	slt $t0, $t2, $t0
 	beq $t0, 1, forstart5
 main2:
-	#NEW MOVE
-	lw $t0, -28($fp)
-	addi $ra, $t0, 0
-	#NEW MOVE
-	lw $t0, -24($fp)
-	addi $sp, $t0, 0
-	#NEW MOVE
-	lw $t0, -20($fp)
-	addi $fp, $t0, 0
+	lw $ra, -28($fp)
+	lw $sp, -24($fp)
+	lw $fp, -20($fp)
 	jr $ra
 Print:
 	lw $a0, 4($sp)
